@@ -40,7 +40,7 @@ Learning Objectives:
 | bam | binary	| Binary  |	 | |	 |
 | bed | binary  | Binary  |  |  |  |
 | biom | multi-format | Text | | | |
-| h5 | binary hierarchical | Text | | | |
+| h5 | binary hierarchical | Binary | | | |
 
 #### What skills should the learner leave the room with?
 * Identify key parts of filenames, and common file types
