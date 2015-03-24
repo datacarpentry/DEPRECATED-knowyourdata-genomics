@@ -37,8 +37,8 @@ Learning Objectives:
 | sff	| 	|  |	Roche/454 sequencing data |	 |	
 | vcf | multi-format | Text	 |	 |		|  |
 | sam | text | Text  |	sequence alignment |  |	 |
-| bam | binary	| Binary  |	sequence alignment | |	 |
-| bed | binary  | Binary  | genome coverage |  |  |
+| bam | alignment	| Binary  |	sequence alignment | |	 |
+| bed | alignment | Binary  | genome coverage |  |  |
 | biom | multi-format | Text | | | |
 | h5 | binary hierarchical | Binary | PacBio sequencing data | | |
 
