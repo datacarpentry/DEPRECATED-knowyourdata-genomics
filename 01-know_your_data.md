@@ -36,7 +36,7 @@ Learning Objectives:
 | fastg | nucleotide | Text | | | |
 | sff	| 	|  |	Roche/454 sequencing data |	 |	
 | vcf | multi-format | Text	 |	 |		|  |
-| sam | alignent | Text  |	reads aligned to a reference  |  |	 |
+| sam | alignment | Text  |	reads aligned to a reference  |  |	 |
 | bam | alignment	| Binary  |	reads aligned to a reference | |	 |
 | bed | binary  | Binary  | genome coverage |  |  |
 | biom | multi-format | Text | | | |
