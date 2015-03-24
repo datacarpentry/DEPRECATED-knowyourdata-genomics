@@ -8,4 +8,8 @@ Compute the md5 checksum of example_file.txt.
 
 In a text editor, add, delete, or substitute one character. Save the file and then re-compute the md5 checksum.
 
-## File typing
+## File attributes
+
+Your sequencing center sends you a link to data at ftp://your.data.is.here/2015-03-24/smith001_R1.fastq.gz. Before doing anything with the it, describe four attributes of the file.
+
+How many reads are in example_R1.fastq?
