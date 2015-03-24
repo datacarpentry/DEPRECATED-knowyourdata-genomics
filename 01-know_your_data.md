@@ -28,19 +28,19 @@ Learning Objectives:
 
 **The following table shows some of the common types of data files and includes some information about them:**
 
-| Data type |	Kind Of Data |	Format |	Type | Type | Type |
+| Data type |	Kind Of Data |	Format |	Example(s) | Type | Type |
 | :------------- | :------------- | :---------------- | :----------------| :----------------| :---------------|
-| txt | multi-format | Text | | | |
-| fastq	| nucleotide  | Text |	 | |  |
-| fasta	| nucleotide | Text | | | |
+| txt | multi-format | Text | study metadata, tab-delimited data | | |
+| fastq	| nucleotide  | Text |	sequencing reads | |  |
+| fasta	| nucleotide | Text | the human genome | | |
 | fastg | nucleotide | Text | | | |
-| sff	| 	|  |	 |	 |	
+| sff	| 	|  |	Roche/454 sequencing data |	 |	
 | vcf | multi-format | Text	 |	 |		|  |
 | sam | text | Text  |	 |  |	 |
 | bam | binary	| Binary  |	 | |	 |
 | bed | binary  | Binary  |  |  |  |
 | biom | multi-format | Text | | | |
-| h5 | binary hierarchical | Binary | | | |
+| h5 | binary hierarchical | Binary | PacBio sequencing data | | |
 
 #### What skills should the learner leave the room with?
 * Identify key parts of filenames, and common file types
