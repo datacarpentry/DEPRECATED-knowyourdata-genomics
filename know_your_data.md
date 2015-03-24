@@ -3,7 +3,7 @@ Getting to know your data
 
 Group: 
 -----
-Josh Herr, Michael Linderman, Jon Badalamenti
+Josh Herr, Michael Linderman, Jon Badalamenti, Jeramia Ory
 
 Learning Objectives:
 -------------------
