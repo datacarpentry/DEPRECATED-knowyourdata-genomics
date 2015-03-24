@@ -3,7 +3,7 @@ Getting to know your data
 
 Group: 
 -----
-Josh Herr, Michael Linderman, Jon Badalamenti, Jeramia Ory, Shari Ellis
+Josh Herr, Michael Linderman, Jon Badalamenti, Jeramia Ory
 
 Learning Objectives:
 -------------------
@@ -32,13 +32,13 @@ Learning Objectives:
 | :------------- | :------------- | :---------------- | :----------------| :----------------| :---------------|
 | txt | multi-format | Text | study metadata, tab-delimited data | | |
 | fastq	| nucleotide  | Text |	sequencing reads | |  |
-| fasta	| nucleotide | Text | the human genome | | |
+| fasta	| nucleotide, protein | Text | the human genome | | |
 | fastg | nucleotide | Text | | | |
 | sff	| 	|  |	Roche/454 sequencing data |	 |	
 | vcf | multi-format | Text	 |	 |		|  |
 | sam | text | Text  |	sequence alignment |  |	 |
-| bam | alignment	| Binary  |	sequence alignment | |	 |
-| bed | alignment | Binary  | genome coverage |  |  |
+| bam | binary	| Binary  |	sequence alignment | |	 |
+| bed | binary  | Binary  | genome coverage |  |  |
 | biom | multi-format | Text | | | |
 | h5 | binary hierarchical | Binary | PacBio sequencing data | | |
 
