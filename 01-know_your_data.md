@@ -30,14 +30,14 @@ Learning Objectives:
 
 | Data type |	Kind Of Data |	Format |	Type | Type | Type |
 | :------------- | :------------- | :---------------- | :----------------| :----------------| :---------------|
-| fastq	|  | |	 | |  |
-| fasta	| | | | | |
-| fastg |
-| sff	| 	| |	 |	 |	
-| vcf |  |	 |	 |		|  |
-| sam |  |  |	 |  |	 |
-| bam | 	|  |	 | |	 |
-| bed |  |  |  |  |  |
+| fastq	| nucleotide  | Text |	 | |  |
+| fasta	| nucleotide | Text | | | |
+| fastg | nucleotide | Text | | | |
+| sff	| 	|  |	 |	 |	
+| vcf | multi-format | Text	 |	 |		|  |
+| sam | text | Text  |	 |  |	 |
+| bam | binary	| Binary  |	 | |	 |
+| bed | binary  | Binary  |  |  |  |
 
 #### What skills should the learner leave the room with?
 * Identify key parts of filenames, and common file types
