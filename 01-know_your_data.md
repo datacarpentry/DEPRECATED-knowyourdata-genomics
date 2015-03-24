@@ -26,7 +26,7 @@ Learning Objectives:
 * Identify the type of downstream file formats that you might need to convert your initial data to 
 
 
-The following table shows some of the common types of data files and includes some information about them:
+**The following table shows some of the common types of data files and includes some information about them:**
 
 | Data type |	Kind Of Data |	Format |	Type | Type | Type |
 | :------------- | :------------- | :---------------- | :----------------| :----------------| :---------------|
