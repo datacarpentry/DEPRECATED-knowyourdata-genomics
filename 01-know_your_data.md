@@ -30,6 +30,7 @@ Learning Objectives:
 
 | Data type |	Kind Of Data |	Format |	Type | Type | Type |
 | :------------- | :------------- | :---------------- | :----------------| :----------------| :---------------|
+| txt | multi-format | Text | | | |
 | fastq	| nucleotide  | Text |	 | |  |
 | fasta	| nucleotide | Text | | | |
 | fastg | nucleotide | Text | | | |
@@ -38,6 +39,7 @@ Learning Objectives:
 | sam | text | Text  |	 |  |	 |
 | bam | binary	| Binary  |	 | |	 |
 | bed | binary  | Binary  |  |  |  |
+| biom | multi-format | Text | | | |
 
 #### What skills should the learner leave the room with?
 * Identify key parts of filenames, and common file types
