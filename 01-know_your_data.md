@@ -36,8 +36,8 @@ Learning Objectives:
 | fastg | nucleotide | Text | | | |
 | sff	| 	|  |	Roche/454 sequencing data |	 |	
 | vcf | multi-format | Text	 |	 |		|  |
-| sam | text | Text  |	sequence alignment |  |	 |
-| bam | binary	| Binary  |	sequence alignment | |	 |
+| sam | alignent | Text  |	sequence alignment |  |	 |
+| bam | alignment	| Binary  |	sequence alignment | |	 |
 | bed | binary  | Binary  | genome coverage |  |  |
 | biom | multi-format | Text | | | |
 | h5 | binary hierarchical | Binary | PacBio sequencing data | | |
