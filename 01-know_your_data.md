@@ -13,17 +13,17 @@ Learning Objectives:
 * You should be able to identify what type of sequencing platform provides which type of data.
 * You should be able to idenitfy where your data came from and what should be the direction you would take for data analysis 
 
-#### What mindset change should the learner have? (ie, awareness of certain techniques)
-* recognize file formats and implications thereof
-* zipped or unzipped? file compression
-* using some tools that take data in compressed state, i.e. zcat, zhead?
-* file extension?
-* file size?
-* how many units? (nucleotides - read number?)
-* how to look at data structure using shell -- does it agree with the file extension?
-* binary, flat text file, data frame? - realize the type of tools to use that type of data
-* specific tools to use that type of data file
-* type of downstream file formats that you might need to convert to.
+#### At the end of this lesson you should be able to:
+* Recognize file formats and implications thereof
+* Whether your data files are zipped or unzipped. You should have an understanding of file compression.
+* Use tools that take data in compressed state (i.e. zcat, zhead)
+* Identify the file extension and if it matches with actual file type.
+* How to determine the file size
+* How many units are in the file (i.e. nucleotides, lines of data, sequence reads, etc.)
+* How to look at data structure using the shell -- does it agree with the file extension?
+* Identify a binary, flat text file, and data frame? 
+* You will be able to realize the type of tools to use for each specific type of data
+* Identify the type of downstream file formats that you might need to convert your initial data to 
 
 #### What skills should the learner leave the room with?
 * Identify key parts of filenames, and common file types
