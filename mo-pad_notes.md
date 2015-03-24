@@ -1,4 +1,4 @@
-Group: Josh Herr, Michael Linderman, Jon Badalamenti
+Group: Josh Herr, Michael Linderman, Jon Badalamenti, Jeramiah Ory, Shari Ellis 
 
 Learning Objectives:
 What's the motivation for this lesson?
