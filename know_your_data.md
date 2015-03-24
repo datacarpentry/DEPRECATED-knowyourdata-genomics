@@ -32,6 +32,7 @@ Learning Objectives:
 * Download file (different protocols), verify (md5 checksum) and "gut check" with head
 
 #### What should be discussed during your module?
+
 #####vocabulary
 * record, field, delimiter characters, comments
 * header lines
@@ -41,15 +42,18 @@ Learning Objectives:
 * downstream data formats (vcf, biom, bam, sam, etc.)
 * types of flat data files (csv, tsv, txt)
 * end of line characters (and platform differences)
+
 ##### technical skills
 * looking at data files and realizing what type of file it is
 * looking at data - what is appropriate for a GUI (text editor) word processor (never!) and what can be done from the command line (everything!)
 * converting one type of data file to another
 * understanding if data is corrupt / data integrity (md5 checksum, etc)
+
 ##### concepts
 * Data tables come in many forms
 * Repeating elements (records/fields) is what enables programmatic approaches
 * What is "too big" for viewing/editing? Some heuristics...
+
 ##### assessments
 * "Handle" data return e-mail from core with ftp URL including download, verify checksum, quickly browse
 * Identify key attributes of example file snippet
