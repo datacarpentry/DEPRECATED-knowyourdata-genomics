@@ -7,11 +7,11 @@ Josh Herr, Michael Linderman, Jon Badalamenti, Jeramia Ory
 
 Learning Objectives:
 -------------------
-#### What's the motivation for this lesson?
-* Identify common features of "data" and data formats and what those features imply
-* genomics - what do the files look like: fasta, fastq, fastg, sra, sff, vcf, sam, bam, bed, etc...
-* genomics platforms and data type? which machine gives you which data...
-* How to realize which direction to proceed when you know something about the format of your data.
+#### What's the goal for this lesson?
+* You should be able to identify common features of "data" and data formats and what those features imply
+* You should be able to look at a file and be able to identify the following types of data: fasta, fastq, fastg, sra, sff, vcf, sam, bam, bed, etc...
+* You should be able to identify what type of sequencing platform provides which type of data.
+* You should be able to idenitfy where your data came from and what should be the direction you would take for data analysis 
 
 #### What mindset change should the learner have? (ie, awareness of certain techniques)
 * recognize file formats and implications thereof
