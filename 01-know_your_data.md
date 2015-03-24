@@ -25,6 +25,20 @@ Learning Objectives:
 * You will be able to realize the type of tools to use for each specific type of data
 * Identify the type of downstream file formats that you might need to convert your initial data to 
 
+
+The following table shows some of the common types of data files and includes some information about them:
+
+| Data type |	Kind Of Data |	Format |	Type | Type | Type |
+| :------------- | :------------- | :---------------- | :----------------| :----------------| :---------------|
+| fastq	|  | |	 | |  |
+| fasta	| | | | | |
+| fastg |
+| sff	| 	| |	 |	 |	
+| vcf |  |	 |	 |		|  |
+| sam |  |  |	 |  |	 |
+| bam | 	|  |	 | |	 |
+| bed |  |  |  |  |  |
+
 #### What skills should the learner leave the room with?
 * Identify key parts of filenames, and common file types
 * Describe key attributes of different file formats (record, field, compression, binary vs. text, ordering) and how that guides your search/use of (groups of) tools
@@ -59,15 +73,3 @@ Learning Objectives:
 * Identify key attributes of example file snippet
 * Recognize "non-traditional" data table, such as file listing, and process it as
 
-
-The following table shows some of the common types of data files and includes some information about them:
-
-| Data type |	Kind Of Data |	Format |	Type | Type | Type |
-| :------------- | :------------- | :---------------- | :----------------| :----------------| :---------------|
-| 	|  | |	 | |  |
-| 	| | | | | |
-| 	| 	| |	 |	 |	
-|  |  |	 |	 |		|  |
-|  |  |  |	 |  |	 |
-|  | 	|  |	 | |	 |
-| |  |  |  |  |  |
