@@ -1,10 +1,6 @@
 Getting to know your data
 ===================
 
-Group: 
------
-Josh Herr, Michael Linderman, Jon Badalamenti, Jeramia Ory
-
 Learning Objectives:
 -------------------
 #### What's the goal for this lesson?
