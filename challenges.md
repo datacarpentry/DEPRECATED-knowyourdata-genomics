@@ -10,7 +10,7 @@ In a text editor, add, delete, or substitute one character. Save the file and th
 
 ## File attributes
 
-Your sequencing center sends you a link to data at `ftp://your.data.is.here/2015-03-24/smith001_R1.fastq.gz`. Before doing anything with it, describe four attributes of the file.
+Your sequencing center sends you a link to data at `ftp://your.data.is.here/2015-03-24/smith001_R1.fastq.gz`. Before doing anything with it, describe four attributes of the file. Should you click on the link in your email? Why or why not?
 
 How many reads are in `example_R1.fastq`?
 
