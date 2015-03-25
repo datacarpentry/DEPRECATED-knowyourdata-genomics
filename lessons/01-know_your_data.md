@@ -38,7 +38,7 @@ Learning Objectives:
 | vcf | multi-format | Text	 |	 |		|  |
 | sam | alignment | Text  |	reads aligned to a reference  |  |	 |
 | bam | alignment	| Binary  |	reads aligned to a reference | |	 |
-| bed | metadata / deature definition  | Binary  | genome coverage |  |  |
+| bed | metadata / feature definitions  | Binary  | genome coverage |  |  |
 | biom | multi-format | Text | | | |
 | h5 | binary hierarchical | Binary | PacBio sequencing data | | |
 
