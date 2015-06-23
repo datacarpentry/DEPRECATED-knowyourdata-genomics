@@ -16,7 +16,7 @@ In this lesson you will learn how to manipulate VCF files. For this exercises we
 
 ## File format
 
-The file format is explained in detail [here](http://samtools.github.io/hts-specs/VCFv4.1.pdf)
+The VCF file format is explained in detail [here](http://samtools.github.io/hts-specs/VCFv4.1.pdf)
 
 To reduce the size of the files, VFCs are usually compressed and indexed using the gzip and tabix command from SAMTOOLS http://www.htslib.org/doc/tabix.html
 
@@ -40,11 +40,11 @@ Once the compilation process is complete, the perl scripts and cpp executable wi
 $ export PATH=$PATH:/my/work/dir/vcftools_x.y.z/bin/
 ```
 
-## VCFLib
+## vcflib
 
-VCFLib provides tools for manipulating VCF files such as comparison, format conversion, filtering, etc. More details on all the available options can be found [here](https://github.com/ekg/vcflib).
+vcflib provides tools for manipulating VCF files such as comparison, format conversion, filtering, etc. More details on all the available options can be found [here](https://github.com/ekg/vcflib).
 
-VCFLib can be downloaded [here](https://github.com/ekg/vcflib). To download and compile vcflib, use the following commands:
+vcflib can be downloaded [here](https://github.com/ekg/vcflib). To download and compile vcflib, use the following commands:
 
 ```
 $ git clone --recursive git://github.com/ekg/vcflib.git
@@ -61,7 +61,7 @@ $ export PATH=$PATH:/my/work/dir/vcflib/bin/
 
 ## HTSlib
 
-Another useful tool we will be using is *tabix*, which is part of [htslib](http://www.htslib.org/download/). You can download the source files for htslib from [here](https://github.com/samtools/htslib/releases/download/1.2.1/htslib-1.2.1.tar.bz2), or from directly from their [github](https://github.com/samtools/htslib) repository. To install HTSlib, use the following commands:
+Another useful tool we will be using is *tabix*, which is part of [HTSlib](http://www.htslib.org/download/). You can download the source files for htslib from [here](https://github.com/samtools/htslib/releases/download/1.2.1/htslib-1.2.1.tar.bz2), or from directly from their [github](https://github.com/samtools/htslib) repository. To install HTSlib, use the following commands:
 
 ```
 $ bunzip2 htslib-1.2.1.tar.bz2
@@ -108,6 +108,7 @@ Notice that we must specify the format of the file (in this case vcf) with the *
 ### 2 - Slices
 In these exercises we want to select slices of the original VCF files.
 
+**(a)**
 We can use tabix to select any region of the file, by giving the indices we are interested in. However, if these indices are not included in the file, no data will be returned. For example:
 
 ```
@@ -120,17 +121,15 @@ We can add the header to the output by using the *-h* flag. If we ask for the he
 $ tabix -h chrY.vcf.gz Y:1-10
 ```
 
-a . For example, if we are interested in the region of chromosome Y from base 2,655,180 to base 2,657,349 we can select  this region of the vcf file using the tabix command:
+For example, if we are interested in the region of chromosome Y from base 2,655,180 to base 2,657,349 we can select  this region of the vcf file using the tabix command:
 
 ```
 $ tabix -h  chrY.vcf.gz Y:2655180-2657349  > mysliceofY.vcf
-
 ```
 This command tells tabix to take only the region  we are interested in and keep the heading (-h) of the original file. The resulting file is a plain text file, if you want to see how it looks like you can use the unix command less:  
 
 ```
 $ less  mysliceofY.vcf
-
 ```
 
 The plain text file can be read and used as it is, however many of the applications in vcflib and vcftools required it to be gzipped and indexed:
@@ -142,19 +141,17 @@ This will produce the gz version of the mysliceofY.vcf  file that can be indexed
 
 ```
 $ tabix -p vcf  mysliceofY.vcf.gz
-
 ```
 We are telling tabix to index the file and we are specifying the file format (-p). This command will produce an index file with the same name and a .tbi extension.  Type the ls -l command to see the files in your folder.  
-
 
 ```
 $ ls -l
 -rw-r--r-- 1 user group  5791 Jun 23 09:37 mysliceofY.vcf.gz
--rw-r--r-- 1 user  group   104 Jun 23 09:37 mysliceofY.vcf.gz.tbi
+-rw-r--r-- 1 user group   104 Jun 23 09:37 mysliceofY.vcf.gz.tbi
 ```
 
-
-b. we want to extract information for one individual (named HG00117) at one locus (named rs2534636 on chromosome Y at position 2657176 ). All the commands below are equivalent, and will create a  new vcf files named myslice:
+**(b)**
+We want to extract information for one individual (named HG00117) at one locus (named rs2534636 on chromosome Y at position 2657176 ). All the commands below are equivalent, and will create a  new vcf files named myslice:
 
 
 ```
@@ -171,18 +168,16 @@ Another equivalent way to do it is to combine the tabix and the vcflib command �
 
 ```
 $ tabix -h mysliceofY.vcf.gz Y:215796346-215796346  |  vcfkeepsamples  -  HG00117  >ex2b2.vcf
-
 ```
 
 A third way to do it would be to ask vcftools to use the compressed file test.vcf.gz to extract only the line relative to the variant that is  on chromosome Y at position  2657176 and the column relative to individual  HG00117 and to recode a new vcf called ex1b3
 
 ```
-
 $ vcftools --gzvcf mysliceofY.vcf.gz  --chr Y --from-bp  2657176 --to-bp 2657176  --indv HG00117    --recode --out ex2b3
-
 ```
 
-c.  We want to extract VCF information for a list of individuals and a specific set of loci. To do this we will ask vcftools to consider individuals in the file “myindividuals.list”  (a single column with individual’s ID file)  and a list of loci in the file “myloci.list” (a single column with a list of loci names file). We will store the result in a vcf called ex2c.
+**(c)**
+We want to extract VCF information for a list of individuals and a specific set of loci. To do this we will ask vcftools to consider individuals in the file “myindividuals.list”  (a single column with individual’s ID file)  and a list of loci in the file “myloci.list” (a single column with a list of loci names file). We will store the result in a vcf called ex2c.
 
 To quickly make a list of loci we will use the unix command append  (>>):
 
@@ -194,12 +189,11 @@ $ cat myloci.list
 rs11575897
 rs2534636
 rs1800865
-
-```
-To  quickly make a list of three individuals we will use the vcflib command vcfsamplenames that extract the ID of the individuals in the VCF file:
-
 ```
 
+To quickly make a list of three individuals we will use the vcflib command vcfsamplenames that extract the ID of the individuals in the VCF file:
+
+```
 $ vcfsamplenames mysliceofY.vcf.gz  | head -3 > myindividual.list
 $ cat myindividual.list
 HG00096
@@ -207,7 +201,6 @@ HG00101
 HG00103
 
 $ vcftools  --gzvcf mysliceofY.vcf.gz --keep myindividual.list  --snps myloci.list --recode --out  ex2c
-
 ```
 
 ### 3 - Info
@@ -220,7 +213,7 @@ In this exercise we are only interested in information contained in the “INFO�
 We can use the vcflib command  vcft2tsv  to transform this string in a tab-delimited string in a file “myinfoat2657176.out” with two lines (a header, and one with values). We will ask vcf2tsv to  put an NA where data is not available using the option -n.
 
 ```
-$  tabix -h mysliceofY.vcf.gz Y:2657176-2657176  | vcf2tsv  -n NA    > myinfoat2657176.out
+$ tabix -h mysliceofY.vcf.gz Y:2657176-2657176  | vcf2tsv  -n NA    > myinfoat2657176.out
 ```
 
 will be transformed in the
@@ -231,7 +224,7 @@ will be transformed in the
 
 To make it easier we will combined the vcf2tsv command with tabix to limit our analysis to one locus only, but the command might be run on the whole vcf file:
 
- ```
+```
 $ vcf2tsv  -n NA  mysliceofY.vcf.gz  > myinfo.out
 ```
 
@@ -268,12 +261,11 @@ In this exercise we want to  calculate allele frequencies  at all loci contained
 
 ```
 $ vcftools --gzvcf chrY.vcf.gz  --freq   --out ex5
-
 ```
+
 This command line will produce a file called ex5.frq. Type less to see the content:
 ```
 $ less ex5.frq
-
 ```
 If we want to restrict the calculation to a few selected individuals and a few loci, we can combine the command line above with few options:
 
