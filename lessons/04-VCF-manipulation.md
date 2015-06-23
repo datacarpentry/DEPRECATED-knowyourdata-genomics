@@ -200,13 +200,13 @@ We can use the vcflib command  vcft2tsv  to transform this string in a tab-delim
 $ tabix -h chrY.vcf.gz Y:2657176-2657176 | vcf2tsv -n NA > myinfoat2657176.out
 ```
 
-will be transformed into the following format:
+The output will be in the following format:
 
 |CHROM|POS|ID|REF|ALT|QUAL|FILTER|AA|AC|AF|AFR_AF|AMR_AF|AN|DP|EAS_AF|END|EUR_AF|NS|SAS_AF|SVTYPE|
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 |Y|2657176|rs2534636|C|T|11169.1|PASS|T|89|0.0721817|0.0078|0.0029|1233|5211|0.0000|NA|0.0250|1233|0.1365|NA|
 
-The command can be run on the whole vcf file.
+The command can be run on the whole vcf file:
 
 ```
 $ vcf2tsv  -n NA  chrY.vcf.gz  > myinfo.out
