@@ -121,59 +121,44 @@ We can add the header to the output by using the *-h* flag. If we ask for the he
 $ tabix -h chrY.vcf.gz Y:1-10
 ```
 
-For example, if we are interested in the region of chromosome Y from base 2,655,180 to base 2,657,349 we can select  this region of the vcf file using the tabix command:
+For example, if we are interested in the region of chromosome Y from base 2,655,180 to base 2,657,349 we can select this region of the vcf file using the tabix command which takes only the region  we are interested in and keeps the heading (*-h*) of the original file. The resulting file is a plain text file, if you want to see how it looks like you can use the unix command less.
 
 ```
 $ tabix -h  chrY.vcf.gz Y:2655180-2657349  > mysliceofY.vcf
-```
-This command tells tabix to take only the region  we are interested in and keep the heading (-h) of the original file. The resulting file is a plain text file, if you want to see how it looks like you can use the unix command less:  
-
-```
 $ less  mysliceofY.vcf
 ```
 
-The plain text file can be read and used as it is, however many of the applications in vcflib and vcftools required it to be gzipped and indexed:
-
- ```
-$ bgzip mysliceofY.vcf  
-```
-This will produce the gz version of the mysliceofY.vcf  file that can be indexed:  
+The plain text file can be read and used as it is, however many of the applications in vcflib and vcftools require it to be compressed (using bgzip) and indexed (using tabix). While telling tabix to index the file, we are specifying the file format (*-p*). Two new files will be produced with the same name as the original VCF and a gz (compression) and  tbi (indexing) extensions.  Type the ls -l command to see the files in your folder.
 
 ```
+$ bgzip mysliceofY.vcf
 $ tabix -p vcf  mysliceofY.vcf.gz
-```
-We are telling tabix to index the file and we are specifying the file format (-p). This command will produce an index file with the same name and a .tbi extension.  Type the ls -l command to see the files in your folder.  
-
-```
 $ ls -l
 -rw-r--r-- 1 user group  5791 Jun 23 09:37 mysliceofY.vcf.gz
 -rw-r--r-- 1 user group   104 Jun 23 09:37 mysliceofY.vcf.gz.tbi
 ```
 
 **(b)**
-We want to extract information for one individual (named HG00117) at one locus (named rs2534636 on chromosome Y at position 2657176 ). All the commands below are equivalent, and will create a  new vcf files named myslice:
+We want to extract information for one individual (named HG00117) at one locus (named rs2534636 on chromosome Y at position 2657176). All the commands below are equivalent, and will create new vcf files:
+
+We ask vcftools to use the compressed file *chrY.vcf.gz* to extract only the line relative to the variant called rs2534636 and the column relative to individual HG00117 and to recode (i.e. rewrite, --recode) a new vcf called ex1b. vcftools will add the extension .recode. If you give a look to this uncompressed file you will see the genotypes of a single individual at one locus:
 
 
 ```
-$ vcftools --gzvcf mysliceofY.vcf.gz  --indv HG00117   --snp  rs2534636  --recode --out ex2b1
-```
-
-here we ask vcftools to use the compressed file test.vcf.gz to extract only the line relative to the variant that is called rs147284345 and the column relative to individual  HG00117 and to recode (i.e. rewrite, --recode) a new vcf called ex1b. vcftools will add the extension .recode. If you give a look to this uncompressed file you will see the genotypes of a single individual at one locus:
-
-```
+$ vcftools --gzvcf chrY.vcf.gz --indv HG00117 --snp  rs2534636  --recode --out ex2b1
 $ less ex2b.recode.vcf
 ```
 
-Another equivalent way to do it is to combine the tabix and the vcflib command “vcfkeepsamples” on the standard out of tabix (-) and redirect the output to the  ex2b2.vcf  file:
+Another equivalent way to do it is to combine the tabix and the vcflib command *vcfkeepsamples* on the standard out of tabix (*-*) and redirect the output to the *ex2b2.vcf* file:
 
 ```
-$ tabix -h mysliceofY.vcf.gz Y:215796346-215796346  |  vcfkeepsamples  -  HG00117  >ex2b2.vcf
+$ tabix -h chrY.vcf.gz Y:215796346-215796346 | vcfkeepsamples -  HG00117 > ex2b2.vcf
 ```
 
-A third way to do it would be to ask vcftools to use the compressed file test.vcf.gz to extract only the line relative to the variant that is  on chromosome Y at position  2657176 and the column relative to individual  HG00117 and to recode a new vcf called ex1b3
+A third way to do it would be to ask vcftools to use the compressed file *chrY.vcf.gz* to extract only the line relative to the variant that is  on chromosome Y at position  2657176 and the column relative to individual  HG00117 and to recode a new vcf called ex2b3.
 
 ```
-$ vcftools --gzvcf mysliceofY.vcf.gz  --chr Y --from-bp  2657176 --to-bp 2657176  --indv HG00117    --recode --out ex2b3
+$ vcftools --gzvcf chrY.vcf.gz  --chr Y --from-bp  2657176 --to-bp 2657176  --indv HG00117    --recode --out ex2b3
 ```
 
 **(c)**
