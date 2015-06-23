@@ -18,9 +18,9 @@ In this lesson you will learn how to manipulate VCF files. For this exercises we
 
 The VCF file format is explained in detail [here](http://samtools.github.io/hts-specs/VCFv4.1.pdf)
 
-To reduce the size of the files, VFCs are usually compressed and indexed using the gzip and tabix command from [SAMTOOLS](http://www.htslib.org/doc/tabix.html)
+To reduce the size of the files, VFCs are usually compressed and indexed using the gzip and tabix command from HTSlib.
 
-VCFtools and VCFLib are two collections of software tools commonly used for handling VCF data files. This lesson gives instructions on installing these tools on a Linux system.
+VCFtools and vcflib are two collections of software tools commonly used for handling VCF data files. This lesson gives instructions on installing these tools on a Linux system.
 
 ## VCFtools
 
