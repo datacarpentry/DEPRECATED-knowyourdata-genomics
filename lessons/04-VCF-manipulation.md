@@ -176,7 +176,7 @@ rs2534636
 rs1800865
 ```
 
-To quickly make a list of three individuals we will use the vcflib command vcfsamplenames that extract the ID of the individuals in the VCF file:
+To quickly make a list of three individuals we will use the vcflib command *vcfsamplenames* that extract the ID of the individuals in the VCF file:
 
 ```
 $ vcfsamplenames chrY.vcf.gz  | head -3 > myindividual.list
@@ -184,7 +184,6 @@ $ cat myindividual.list
 HG00096
 HG00101
 HG00103
-
 $ vcftools  --gzvcf chrY.vcf.gz --keep myindividual.list  --snps myloci.list --recode --out  ex2c
 ```
 
@@ -201,7 +200,7 @@ We can use the vcflib command  vcft2tsv  to transform this string in a tab-delim
 $ tabix -h chrY.vcf.gz Y:2657176-2657176 | vcf2tsv -n NA > myinfoat2657176.out
 ```
 
-will be transformed in the
+will be transformed into the following format:
 
 |CHROM|POS|ID|REF|ALT|QUAL|FILTER|AA|AC|AF|AFR_AF|AMR_AF|AN|DP|EAS_AF|END|EUR_AF|NS|SAS_AF|SVTYPE|
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
