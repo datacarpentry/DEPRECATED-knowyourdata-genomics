@@ -216,7 +216,7 @@ $ vcf2tsv  -n NA  chrY.vcf.gz  > myinfo.out
 
 In this exercise we want to know the genotype of  individuals  HG00117 and HG00101 on chromosome Y in the region between base 2,655,180 and base  2,658,745. This example will show you both how to extract genotype information and how  to combine commands of the vcflib.
 
-We will  first select the region (but it can also be a single locus) with tabix and then ask vcfkeepsamples to process the standard out (*-*)  to slice the vcf for individual HG00117. Finally we will ask vcfgenotypes to extract the genotype:
+We will  first select the region (but it can also be a single locus) with tabix and then ask *vcfkeepsamples* to process the standard out (*-*)  to slice the vcf for individual HG00117. Finally we will ask *vcfgenotypes* to extract the genotype:
 
 ```
 $ tabix -h chrY.vcf.gz  Y:2655180-2658745 | vcfkeepsamples  -  HG00117 HG00101 | vcfgenotypes   -
@@ -241,14 +241,10 @@ Y       2657349 T       C       T,C     HG00101:T       HG00117:T
 For all loci available in the VCF file in the selected region we will see the chromosome the position, information about reference and alternate alleles and the  genotype of the two selected individuals.
 
 ### 5 - Extract allele frequencies
-In this exercise we want to  calculate allele frequencies  at all loci contained in the cromosome Y vcf file. We will use
+In this exercise we want to  calculate allele frequencies  at all loci contained in the chromosome Y *chrY.vcf.gz* file. This command line will produce a file called *ex5.frq*. Type *less* to see the content:
 
 ```
 $ vcftools --gzvcf chrY.vcf.gz  --freq --out ex5
-```
-
-This command line will produce a file called *ex5.frq*. Type less to see the content:
-```
 $ less ex5.frq
 ```
 If we want to restrict the calculation to a few selected individuals and a few loci, we can combine the command line above with few options:
