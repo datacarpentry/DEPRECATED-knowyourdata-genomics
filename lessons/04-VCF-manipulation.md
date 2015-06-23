@@ -7,9 +7,9 @@ minutes: --
 
 ## Learning Objectives
 
-* Install tools for VCF file manipulation
-* Download VCF files from 1000 Genomes project
-* Work with VCF files ** More specifically, what are we doing with these files? **
+* Install tools for VCF file manipulation.
+* Download VCF files from 1000 Genomes project.
+* Work with VCF files: slicing and extracting genotypes, locus and frequencies
 
 ## Lesson
 In this lesson you will learn how to manipulate VCF files. For this exercises we will use publicly available data from the 1000 Genomes  Project.
@@ -18,15 +18,15 @@ In this lesson you will learn how to manipulate VCF files. For this exercises we
 
 The VCF file format is explained in detail [here](http://samtools.github.io/hts-specs/VCFv4.1.pdf)
 
-To reduce the size of the files, VFCs are usually compressed and indexed using the gzip and tabix command from SAMTOOLS http://www.htslib.org/doc/tabix.html
+To reduce the size of the files, VFCs are usually compressed and indexed using the gzip and tabix command from [SAMTOOLS](http://www.htslib.org/doc/tabix.html)
 
-VCFTools and VCFLib are two collections of software tools commonly used for handling VCF data files. This lesson gives instructions on installing these tools on a Linux system.
+VCFtools and VCFLib are two collections of software tools commonly used for handling VCF data files. This lesson gives instructions on installing these tools on a Linux system.
 
-## VCFTools
+## VCFtools
 
-VCFTools provides tools for site filtering, individual filtering and genotype filtering along with multiple options for output and comparison. More detailed instructions on using VCFTools can be found [here](http://vcftools.sourceforge.net/man_latest.html).
+VCFtools provides tools for site filtering, individual filtering and genotype filtering along with multiple options for output and comparison. More detailed instructions on using VCFtools can be found [here](http://vcftools.sourceforge.net/man_latest.html).
 
-To install VCFTools, download the source files from [here](http://sourceforge.net/projects/vcftools/files/). Extract the content of the downloaded vcftools_x.y.z.tar.gz file (*note*: x.y.z is the version of the file downloaded). Navigate to the folder where files have been extracted, and type *make* to compile the files.
+To install VCFtools, download the source files from [here](http://sourceforge.net/projects/vcftools/files/). Extract the content of the downloaded vcftools_x.y.z.tar.gz file (*note*: x.y.z is the version of the file downloaded). Navigate to the folder where files have been extracted, and type *make* to compile the files.
 
 ```
 $ tar xzf vcftools_x.y.z.tar.gz
