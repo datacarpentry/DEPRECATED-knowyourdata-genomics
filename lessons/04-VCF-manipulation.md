@@ -194,7 +194,7 @@ In this exercise we are only interested in information contained in the “INFO�
 “AA=T;AC=89;AF=0.0721817;AN=1233;DP=5211;NS=1233;AMR_AF=0.0029;AFR_AF=0.0078;EUR_AF=0.0250;SAS_AF=0.1365;EAS_AF=0.0000”
 ```
 
-We can use the vcflib command  vcft2tsv  to transform this string in a tab-delimited string in a file “myinfoat2657176.out” with two lines (a header, and one with values). We will ask vcf2tsv to  put an NA where data is not available using the option -n.
+We can use the vcflib command  vcft2tsv  to transform this string in a tab-delimited string in a file “myinfoat2657176.out” with two lines (a header, and one with values). We will ask vcf2tsv to  put an NA where data is not available using the option -n. To make it easier we will combined the *vcf2tsv* command with tabix to limit our analysis to one locus:
 
 ```
 $ tabix -h chrY.vcf.gz Y:2657176-2657176 | vcf2tsv -n NA > myinfoat2657176.out
@@ -206,7 +206,7 @@ will be transformed into the following format:
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 |Y|2657176|rs2534636|C|T|11169.1|PASS|T|89|0.0721817|0.0078|0.0029|1233|5211|0.0000|NA|0.0250|1233|0.1365|NA|
 
-To make it easier we will combined the vcf2tsv command with tabix to limit our analysis to one locus only, but the command might be run on the whole vcf file:
+The command can be run on the whole vcf file.
 
 ```
 $ vcf2tsv  -n NA  chrY.vcf.gz  > myinfo.out
