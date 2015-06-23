@@ -145,7 +145,7 @@ We ask vcftools to use the compressed file *chrY.vcf.gz* to extract only the lin
 
 
 ```
-$ vcftools --gzvcf chrY.vcf.gz --indv HG00117 --snp  rs2534636  --recode --out ex2b1
+$ vcftools --gzvcf chrY.vcf.gz --indv HG00117 --snp  rs2534636 --recode --out ex2b1
 $ less ex2b.recode.vcf
 ```
 
@@ -162,7 +162,7 @@ $ vcftools --gzvcf chrY.vcf.gz  --chr Y --from-bp  2657176 --to-bp 2657176  --in
 ```
 
 **(c)**
-We want to extract VCF information for a list of individuals and a specific set of loci. To do this we will ask vcftools to consider individuals in the file “myindividuals.list”  (a single column with individual’s ID file)  and a list of loci in the file “myloci.list” (a single column with a list of loci names file). We will store the result in a vcf called ex2c.
+We want to extract VCF information for a list of individuals and a specific set of loci. To do this we will ask vcftools to consider individuals in the file *myindividual.list*  (a single column with individual’s ID file)  and a list of loci in the file “myloci.list” (a single column with a list of loci names file). We will store the result in a vcf called ex2c.
 
 To quickly make a list of loci we will use the unix command append  (>>):
 
@@ -179,13 +179,13 @@ rs1800865
 To quickly make a list of three individuals we will use the vcflib command vcfsamplenames that extract the ID of the individuals in the VCF file:
 
 ```
-$ vcfsamplenames mysliceofY.vcf.gz  | head -3 > myindividual.list
+$ vcfsamplenames chrY.vcf.gz  | head -3 > myindividual.list
 $ cat myindividual.list
 HG00096
 HG00101
 HG00103
 
-$ vcftools  --gzvcf mysliceofY.vcf.gz --keep myindividual.list  --snps myloci.list --recode --out  ex2c
+$ vcftools  --gzvcf chrY.vcf.gz --keep myindividual.list  --snps myloci.list --recode --out  ex2c
 ```
 
 ### 3 - Info
@@ -198,7 +198,7 @@ In this exercise we are only interested in information contained in the “INFO�
 We can use the vcflib command  vcft2tsv  to transform this string in a tab-delimited string in a file “myinfoat2657176.out” with two lines (a header, and one with values). We will ask vcf2tsv to  put an NA where data is not available using the option -n.
 
 ```
-$ tabix -h mysliceofY.vcf.gz Y:2657176-2657176  | vcf2tsv  -n NA    > myinfoat2657176.out
+$ tabix -h chrY.vcf.gz Y:2657176-2657176 | vcf2tsv -n NA > myinfoat2657176.out
 ```
 
 will be transformed in the
@@ -210,17 +210,17 @@ will be transformed in the
 To make it easier we will combined the vcf2tsv command with tabix to limit our analysis to one locus only, but the command might be run on the whole vcf file:
 
 ```
-$ vcf2tsv  -n NA  mysliceofY.vcf.gz  > myinfo.out
+$ vcf2tsv  -n NA  chrY.vcf.gz  > myinfo.out
 ```
 
-### 4 Extract a genotype
+### 4 - Extract a genotype
 
 In this exercise we want to know the genotype of  individuals  HG00117 and HG00101 on chromosome Y in the region between base 2,655,180 and base  2,658,745. This example will show you both how to extract genotype information and how  to combine commands of the vcflib.
 
-We will  first select the region (but it can also be a single locus) with tabix and then ask vcfkeepsamples to process the standard out (-)  to slice the vcf for individual HG00117. Finally we will ask vcfgenotypes to extract the genotype:
+We will  first select the region (but it can also be a single locus) with tabix and then ask vcfkeepsamples to process the standard out (*-*)  to slice the vcf for individual HG00117. Finally we will ask vcfgenotypes to extract the genotype:
 
 ```
-$ tabix -h mysliceofY.vcf.gz  Y:2655180-2658745 | vcfkeepsamples  -  HG00117 HG00101 | vcfgenotypes   -
+$ tabix -h chrY.vcf.gz  Y:2655180-2658745 | vcfkeepsamples  -  HG00117 HG00101 | vcfgenotypes   -
 Y       2655180 G       A       G,A     HG00101:G       HG00117:G
 Y       2655471 A       C       A,C     HG00101:A       HG00117:A
 Y       2655754 A       T       A,T     HG00101:A       HG00117:A
@@ -242,23 +242,23 @@ Y       2657349 T       C       T,C     HG00101:T       HG00117:T
 For all loci available in the VCF file in the selected region we will see the chromosome the position, information about reference and alternate alleles and the  genotype of the two selected individuals.
 
 ### 5 - Extract allele frequencies
-In this exercise we want to  calculate allele frequencies  at all loci contained in the cromosome Y  vcf file. We will use
+In this exercise we want to  calculate allele frequencies  at all loci contained in the cromosome Y vcf file. We will use
 
 ```
-$ vcftools --gzvcf chrY.vcf.gz  --freq   --out ex5
+$ vcftools --gzvcf chrY.vcf.gz  --freq --out ex5
 ```
 
-This command line will produce a file called ex5.frq. Type less to see the content:
+This command line will produce a file called *ex5.frq*. Type less to see the content:
 ```
 $ less ex5.frq
 ```
 If we want to restrict the calculation to a few selected individuals and a few loci, we can combine the command line above with few options:
 
 ```
-$ vcftools --gzvcf chrY.vcf.gz  --freq   --out ex5slice  --keep myindividuals.list  --snps myloci.list
+$ vcftools --gzvcf chrY.vcf.gz  --freq --out ex5slice  --keep myindividuals.list  --snps myloci.list
 ```
 
-The output shoud look like this:
+The output should look like this:
 
 ```
 $ cat ex5slice.frq
