@@ -34,7 +34,11 @@ gunzip -l <bundle.gz>
 gunzip <bundle.gz>
 ```
 
-Things are slightly different if you encounter a tarball: `thisfile.tar` or `thatfile.tar.gz` or `tacofile.tgz`. You can view the contents of tarballs using the `tar` program:
+Things are slightly different (read 'complex') if you encounter a tarball: `thisfile.tar` or `thatfile.tar.gz` or `tacofile.tgz`.
+
+![]( http://imgs.xkcd.com/comics/tar.png "I'm so sorry..." )
+
+You can view the contents of tarballs using the `tar` program:
 
 ```bash
 tar -tf <thisfile.tar>
