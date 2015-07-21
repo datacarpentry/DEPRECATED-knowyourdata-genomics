@@ -5,7 +5,7 @@
 Each step of processing and analysis of a genomics pipeline spawns many new files, of many types. Some filetypes, like GFF are only found in a single step of the pipeline, and so are relativly easy to keep track of.
 However, most are more like FASTQ files, where any given file could be from many different steps of the pipeline. These are the ones that cause the most trouble, and need the most careful management.
 
-![FileTypes](Files/ngs_map_read_file_formats.png)
+![FileTypes](../Files/ngs_map_read_file_formats.png)
 
 First, lets see what data files we have available:
 ```bash
