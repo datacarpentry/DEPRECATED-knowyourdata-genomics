@@ -28,13 +28,13 @@ Once you know whether you have `curl` or `wget` use one of the following command
 
 ```bash
 cd
-wget <insert website here>
+wget https://www.dropbox.com/s/d7zitckb5fz8494/GenomicsLesson.zip
 ```
 or
 
 ```bash
 cd
-curl -O <insert website here>
+curl -O https://www.dropbox.com/s/d7zitckb5fz8494/GenomicsLesson.zip
 ```
 
 ##Checking the data
@@ -43,3 +43,32 @@ Most genomics files that you download will be very large, which can make them mo
 Furthermore, even the files that are filled with familiar characters are nearly impossible to fact check by eye. Imagine trying to make sure your favorite genome had downloaded correctly by manually comparing each base on your computer to the one at NCBI. Luckily theres a better way.
 
 Whenever you download a large or important file, you should check to make sure that it is an exact match to the copy online. The most common way to do this is to run the file through a cryptographic hash function which processes all of the information in the file through a complex algorithm to get a hash value. A hash value looks a bit like an ideal password: a random looking mix of letters and numbers. Because the hash function is a very complex equation, in theory, for any given hash function, every unique input will have a unique hash value. So if you get the same hash value from two different files, those files are identical.
+
+There are many available hash functions, and as computers get more sophisticated, older ones become easier to hack, so there will likely alwasy be new ones. But right now, we're going to use MD5 because it is pre-installed on most computers, and is most likely the one your sequencing facility or collaborator will send you when they give you large files.
+
+There are two common versions of MD5, and we're going to use `which` again to see which one you have installed:
+
+```bash
+which md5
+which md5sum
+```
+
+Then get get the hash value for the zip file you downloaded by running either:
+
+```bash
+md5 GenomicsLesson.zip
+```
+or
+
+```bash
+md5sum GenomicsLesson.zip
+```
+
+The file I uploaded gave this answer:
+```bash
+md5 GenomicsLesson.zip
+MD5 (GenomicsLesson.zip) = 2c8a16af725ec3e8e0e6ec832dbe4e31
+```
+
+
+
