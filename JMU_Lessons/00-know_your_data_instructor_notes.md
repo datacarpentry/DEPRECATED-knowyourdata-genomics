@@ -26,18 +26,19 @@ Learning Objectives:
 
 | File Extension |	Type of Data |	Format |	Example(s) | More Info | Type |
 | :------------- | :------------- | :---------------- | :----------------| :----------------| :---------------|
-| txt | multi-format | Text | study metadata, tab-delimited data | <a href="https://en.wikipedia.org/wiki/Text_file"> txt</a> | |
+| txt | multi-format | Text | study metadata, tab-delimited data | <a href="https://en.wikipedia.org/wiki/Text_file"> text</a> | |
 | fastq	| nucleotide  | Text |	sequencing reads |<a href="https://en.wikipedia.org/wiki/FASTQ_format>" fastq </a> |  |
 | fasta	| nucleotide, protein | Text | the human genome | <a href="https://en.wikipedia.org/wiki/FASTA"> fasta</a>| |
 | fastg | nucleotide | Text | <a href="http://www.homolog.us/blogs/blog/2012/12/27/fastg-a-new-format-for-representing-sequence/"> fastg</a> | | |
-| sff	| 	|  |	Roche/454 sequencing data |	<a href="http://www.ncbi.nlm.nih.gov/Traces/trace.cgi?cmd=show&f=formats&m=doc&s=format#sff"> sff</a> |	|
-| vcf | multi-format | Text	 |	 |	<a href="https://en.wikipedia.org/wiki/Variant_Call_Format"> vcf </a>	|  |
-| sam | alignment | Text  |	reads aligned to a reference  | <a href="https://samtools.github.io/hts-specs/SAMv1.pdf"> sam </a> |	 |
-| bam | alignment	| Binary  |	reads aligned to a reference | <a href="https://samtools.github.io/hts-specs/SAMv1.pdf"> bam </a> |	 |
+| sff	| 	|  |	Roche/454 sequencing data |	| <a href="http://www.ncbi.nlm.nih.gov/Traces/trace.cgi?cmd=show&f=formats&m=doc&s=format#sff"> standard flowgram format</a> |	|
+| vcf | multi-format | Text	 |	 |	<a href="https://en.wikipedia.org/wiki/Variant_Call_Format"> variant call format </a>	|  |
+| sam | alignment | Text  |	reads aligned to a reference  | <a href="https://samtools.github.io/hts-specs/SAMv1.pdf"> sequence alignment map </a> |	 |
+| bam | alignment	| Binary  |	reads aligned to a reference | <a href="https://samtools.github.io/hts-specs/SAMv1.pdf"> binary alignment map </a> |	 |
 | bed | metadata / feature definitions  | Binary  | genome coverage | <a href="http://www.ensembl.org/info/website/upload/bed.html"> bed </a> |  |
 | biom | multi-format | Text | | <a href="http://biom-format.org/"> biom </a>| |
-| h5 | binary hierarchical | Binary | PacBio sequencing data | <a href="https://en.wikipedia.org/wiki/Hierarchical_Data_Format"> h5 </a>| |
+| h5 | binary hierarchical | Binary | PacBio sequencing data | <a href="https://en.wikipedia.org/wiki/Hierarchical_Data_Format"> hierarchical data format </a>| |
 | pileup | alignment | Text | mpileup, SNP and indel calling| <a href="https://en.wikipedia.org/wiki/Pileup_format"> pileup</a>| |
+| gff | genome description | Text | examples | <a href="https://en.wikipedia.org/wiki/General_feature_format"> general feature format</a> | |
 
 
 #### What skills should the learner leave the room with?
