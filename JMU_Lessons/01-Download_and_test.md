@@ -67,7 +67,7 @@ md5sum GenomicsLesson.zip
 The file I uploaded gave this answer:
 ```bash
 md5 GenomicsLesson.zip
-MD5 (GenomicsLesson.zip) = 2c8a16af725ec3e8e0e6ec832dbe4e31
+MD5 (GenomicsLesson.zip) = 47c3e3a8723977b81623ede875593277
 ```
 
 
