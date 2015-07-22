@@ -150,18 +150,19 @@ tail -20 12724.sam
 ```
 `tail` works just like `head`, except it counts up from the end of the file instead of down from the top. So now we can see an example of the alignment part of the file.The alignments all have at least 11 standard columns (although the values might be zero), but can have lots of extra ones as well. These are the 11 required columns:
 
-| Col | Field | Type | Brief description
-| 1 | QNAME | String | Query template NAME
-| 2 | FLAG | Int |  bitwise FLAG
-| 3 | RNAME | String | Reference sequence NAME
-| 4 | POS | Int | 1-based leftmost mapping POSition
-| 5 | MAPQ | Int | MAPping Quality
-| 6 | CIGAR | String | CIGAR string
-| 7 | RNEXT | String | Ref. name of the mate/next read
-| 8 | PNEXT | Int | Position of the mate/next read
-| 9 | TLEN | Int | observed Template LENgth
-| 10 | SEQ | String | segment SEQuence
-| 11 | QUAL | String | ASCII of Phred-scaled base QUALity+33
+Col | Field | Type | Brief description
+----|-------|------|------------------
+1 | QNAME | String | Query template NAME
+2 | FLAG | Int |  bitwise FLAG
+3 | RNAME | String | Reference sequence NAME
+4 | POS | Int | 1-based leftmost mapping POSition
+5 | MAPQ | Int | MAPping Quality
+6 | CIGAR | String | CIGAR string
+7 | RNEXT | String | Ref. name of the mate/next read
+8 | PNEXT | Int | Position of the mate/next read
+9 | TLEN | Int | observed Template LENgth
+10 | SEQ | String | segment SEQuence
+11 | QUAL | String | ASCII of Phred-scaled base QUALity+33
 
 Because SAM files are tab-delimited, they are easy for both people and computers to read, (just not as quickly as BAM files). For instance, we can use the program `cut` to get the flags from a SAM file:
 
@@ -191,7 +192,7 @@ tail -20 12724.sam | cut -f 2,10
 Variable Call Format contains the genotype information for variable bases in reads mapped to an alignment. Only variable sites are included.
 
 Example:
-
+```
 ##fileformat=VCFv4.0
 ##fileDate=20090805
 ##source=myImputationProgramV3.1
@@ -215,7 +216,7 @@ Example:
 20     1110696 rs6040355 A      G,T     67   PASS   NS=2;DP=10;AF=0.333,0.667;AA=T;DB GT:GQ:DP:HQ 1|2:21:6:23,27 2|1:2:0:18,2   2/2:35:4
 20     1230237 .         T      .       47   PASS   NS=3;DP=13;AA=T                   GT:GQ:DP:HQ 0|0:54:7:56,60 0|0:48:4:51,51 0/0:61:2
 20     1234567 microsat1 GTCT   G,GTACT 50   PASS   NS=3;DP=9;AA=G                    GT:GQ:DP    0/1:35:4       0/2:17:2       1/1:40:3
-
+```
 
 
 Pre-Header information
@@ -225,11 +226,11 @@ File meta-information is included after the ## string
 
 The 'fileformat' field details the VCF format version number.
 
-##fileformat=VCFv4.0
+`##fileformat=VCFv4.0`
 
 INFO fields
 
-##INFO=<ID=ID,Number=number,Type=type,Description=”description”>
+`##INFO=<ID=ID,Number=number,Type=type,Description=”description”>`
 
 The Number entry is the number of values that can be included with the INFO field. For example, if the INFO field contains a single number, then this value should be 1. However, if the INFO field describes a pair of numbers, then this value should be 2 and so on. If the number of possible values varies, is unknown, or is unbounded, then this value should be '.'. Possible Types are: Integer, Float, Character, String and Flag. The 'Flag' type indicates that the INFO field does not contain a Value entry, and hence the Number should be 0 in this case. The Description value must be surrounded by double-quotes.
 
@@ -239,7 +240,7 @@ Each column in the body of the file should have an info field in the header.
 The header line syntax
 
 The header line names the 8 fixed, mandatory columns. These columns are as follows:
-
+```
 #CHROM
 POS
 ID
@@ -248,6 +249,7 @@ ALT
 QUAL
 FILTER
 INFO
+```
 If genotype data is present in the file, these are followed by a FORMAT column header, then an arbitrary number of sample IDs. The header line is tab-delimited.
 
 3. Data lines
@@ -268,10 +270,10 @@ QUAL phred-scaled quality score for the assertion made in ALT.
 
 FILTER filter: PASS if this position has passed all filters, i.e. a call is made at this position. Otherwise, if the site has not passed all filters, a semicolon-separated list of codes for filters that fail. e.g. “q10;s50” might indicate that at this site the quality is below 10 and the number of samples with data is below 50% of the total number of samples.
 
-
+```
 ###Non-Genomics Text Files
 ####README, TXT, MD, HTML, R, Python & limitless others
-
+```
 There are *lots* of text file types that are not specific to genomics, but that you'll end up using all the time. These can have any format at all, and any file extension, the only stipulation is that they be written in ASCII text. The text your reading right now is a .md (markdown) file rendered as a .html (so you can read it online). 
 All of them can also be opened in a text editor (like sublime). Technically, you can open just about anything in a text editor (like we did with the BAM file), but text format files can be *meaningfully* opened in a text editor. 
 So if you have a new file, how do you tell what kind it is? The way we've been doing it is by opening each file and looking at them, but that won't always work. Once you have thousands of new files, you don't want to open each one and do an eyeball check. It's much better to let the computer do it for you:
