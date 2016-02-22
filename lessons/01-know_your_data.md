@@ -61,7 +61,7 @@ According to [wikipedia](https://en.wikipedia.org/wiki/Checksum) a checksum is '
 1. Use ``wget`` to download two 'test' genomes from the following url:
 
    ```bash
-$ wget http://de.iplantcollaborative.org/dl/d/6E4E9943-93F8-4136-86E3-14DA6D1B604F/GCF_000017985.1_ASM1798v1_genomic_2.fna
+$ wget http://de.iplantcollaborative.org/dl/d/6E4E9943-93F8-4136-86E3-14DA6D1B604F/GCF_000017985.1_ASM1798v1_genomic_1.fna
 ```
 and
    
@@ -73,6 +73,8 @@ $ wget http://de.iplantcollaborative.org/dl/d/6E4E9943-93F8-4136-86E3-14DA6D1B60
    ```bash 
 $ md5sum <file>
 ```
+
+Note: On a Mac, use `md5` instead of `md5sum`. 
 
 ### B. Download a reference genome from Ensembl
 
