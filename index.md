@@ -2,11 +2,7 @@
 layout: lesson
 root: .
 title: Importing and downloading data 
-<<<<<<< HEAD
 minutes: 60
-=======
-minutes: 15
->>>>>>> 75698724fbdd51b9d99dc09b13d85a3032aa8743
 ---
 
 ## Learning Objectives
