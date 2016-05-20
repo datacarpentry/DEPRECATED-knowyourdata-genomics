@@ -15,17 +15,9 @@ minutes: 60
         - using `curl`
     - from SRA
     - from a grid resource (iRODS)
-<<<<<<< HEAD
     - Using an FTP client
 - Be able to verify file integrity using checksums
 - Be able to preview and decompress compressed files
-
-=======
-    - from a volume
-- Be able to verify file integrity using checksums
-- Be able to preview and decompress compressed files
-- Understand the 'life cycle of data'
->>>>>>> 75698724fbdd51b9d99dc09b13d85a3032aa8743
 
 ## Lesson
 
