@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: .
-title: Importing and downloading data 
+title: Importing and Downloading Data
 minutes: 60
 ---
 
