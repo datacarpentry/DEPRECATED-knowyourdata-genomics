@@ -1,10 +1,5 @@
-# cloud-genomics
-Lesson on Cloud/HPC for genomics lessons
+# knowyourdata-genomics
 
-Contributors:
-* [Chris Fields](http://www.bioperl.org/wiki/User:Cjfields)
-* Bob Freeman
-* Adina Howe
-* Andréa Matsunaga
-* [Stephen Turner](https://twitter.com/genetics_blog)
-* [Jason Williams](https://twitter.com/JasonWilliamsNY)
+Lesson on Getting to Know Your Data for genomics
+
+This repository contains core material for the 2-day data carpentry workshop. Please see our contribution guidelines before contributing updates, bug fixes, or other corrections.

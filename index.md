@@ -192,7 +192,7 @@ $ iinit
 ```
 2. You will then be asked to setup your account and will need to enter the following information
 
-   |Prompt|Entry|
+|Prompt|Entry|
 |------|-----|
 |irodsHost|data.iplantcollaborative.org|
 |port|1247|
@@ -251,7 +251,7 @@ Instructions here are given for the genomics workshop cloud machines, but the pr
 5. Move files between computers by drawing and dropping them in the desired locations. 
     - *Tip:* You can resize windows in FileZilla for easier viewing.  
 
-![filzilla](./img/filezilla-wholeshot.png)
+ <img src="./img/filezilla-wholeshot.png" alt="FileZilla Screenshot"  width="500"> 
 
 ## File Integrity and Compression
 
