@@ -161,6 +161,7 @@ The [Toolkit documentation](https://www.ncbi.nlm.nih.gov/Traces/sra/?view=toolki
 
 ```
 $ ./prefetch -pc SRR390728
+
 # the "./" in front of the prefetch program tells linux to run/execute that program
 # the downloaded file will appear in an 'ncbi' folder that will be created in
 # your home directory. 
@@ -199,6 +200,7 @@ $ iinit
 |zone|iplant|
 |irodsUserName|your CyVerse username|
 |Current iRODS password|your CyVerse password|
+
 3. Verify that you have connected to your CyVerse Data Store; view the contents of your home directory using the following the *ils* command:
 
    ```bash
