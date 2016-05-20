@@ -2,7 +2,11 @@
 layout: lesson
 root: .
 title: Importing and downloading data 
+<<<<<<< HEAD
 minutes: 60
+=======
+minutes: 15
+>>>>>>> 75698724fbdd51b9d99dc09b13d85a3032aa8743
 ---
 
 ## Learning Objectives
@@ -15,10 +19,17 @@ minutes: 60
         - using `curl`
     - from SRA
     - from a grid resource (iRODS)
+<<<<<<< HEAD
     - Using an FTP client
 - Be able to verify file integrity using checksums
 - Be able to preview and decompress compressed files
 
+=======
+    - from a volume
+- Be able to verify file integrity using checksums
+- Be able to preview and decompress compressed files
+- Understand the 'life cycle of data'
+>>>>>>> 75698724fbdd51b9d99dc09b13d85a3032aa8743
 
 ## Lesson
 
@@ -132,7 +143,7 @@ $  wget ftp://ftp.ncbi.nlm.nih.gov/genbank/README.genbank
 $ curl -o genbankreadme.txt ftp://ftp.ncbi.nlm.nih.gov/genbank/README.genbank
 # -o option allows you to set the filename
 ```
-
+---
 **D. Importing files from SRA using SRA Toolkit**
 
 The NCBI [Sequence Read Archive](https://www.ncbi.nlm.nih.gov/sra) is a large repository of high-throughput sequencing read data. As valuable as these data are, it can still be challenging to navigate and import these data. 
@@ -166,6 +177,7 @@ $ ./prefetch -pc SRR390728
 ```
 The toolkit will also explain the important utilities such as `fasts-dump` which will decompress the .sra file format into a fastq file and the ascp download utility which can help accelerate large downloads. 
 
+---
 
 **E. Importing files from a grid resource (iRODS)**
 
@@ -222,6 +234,8 @@ $ iget -P iplant_datastore_file.txt .
 ```
 
 There are several other iCommands options (including how to use the -T option for more reliable big data transfers, and -r command for recursive transfers of directories - See [iCommands documentation](https://pods.iplantcollaborative.org/wiki/display/DS/Using+iCommands). 
+
+---
 
 **F. Importing files using and FTP client**
 
