@@ -124,14 +124,16 @@ On your local computer choose (or create) a directory with at least one file. Tr
 `curl` and `wget` are an easy way to import files when you have a URL. These methods generally work, however for really large datasets these methods will be slower (they are done over HTTP like standard webpages). 
 
 **Example Usage:** 
-```bash
 
-$  wget ftp://ftp.ncbi.nlm.nih.gov/genbank/README.genbank
+    ```bash
+    $  wget ftp://ftp.ncbi.nlm.nih.gov/genbank/README.genbank
 
-$ curl -o genbankreadme.txt ftp://ftp.ncbi.nlm.nih.gov/genbank/README.genbank
-# -o option allows you to set the filename
-```
+    $ curl -o genbankreadme.txt ftp://ftp.ncbi.nlm.nih.gov/genbank/README.genbank
+    # -o option allows you to set the filename
+    ```
+
 ---
+
 **D. Importing files from SRA using SRA Toolkit**
 
 The NCBI [Sequence Read Archive](https://www.ncbi.nlm.nih.gov/sra) is a large repository of high-throughput sequencing read data. As valuable as these data are, it can still be challenging to navigate and import these data. 
