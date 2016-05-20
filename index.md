@@ -198,6 +198,7 @@ $ iinit
     |zone|iplant|
     |irodsUserName|your CyVerse username|
     |Current iRODS password|your CyVerse password|
+    
 3. Verify that you have connected to your CyVerse Data Store; view the contents of your home directory using the following the *ils* command:
 
    ```bash
