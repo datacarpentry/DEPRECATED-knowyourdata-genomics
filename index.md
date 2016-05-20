@@ -191,13 +191,13 @@ $ iinit
 ```
 2. You will then be asked to setup your account and will need to enter the following information
 
-   |Prompt|Entry|
-|------|-----|
-|irodsHost|data.iplantcollaborative.org|
-|port|1247|
-|zone|iplant|
-|irodsUserName|your CyVerse username|
-|Current iRODS password|your CyVerse password|
+    |Prompt|Entry|
+    |------|-----|
+    |irodsHost|data.iplantcollaborative.org|
+    |port|1247|
+    |zone|iplant|
+    |irodsUserName|your CyVerse username|
+    |Current iRODS password|your CyVerse password|
 3. Verify that you have connected to your CyVerse Data Store; view the contents of your home directory using the following the *ils* command:
 
    ```bash
