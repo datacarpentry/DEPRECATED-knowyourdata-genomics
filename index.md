@@ -41,7 +41,7 @@ According to the learning objectives, we want you to know about 7 methods to tra
 - Many of the programs covered don't have a simple alternative for PC. Since `scp` is the simplest, we will cover that here. For PC users who must try some of the other programs, [Cygwin](https://www.cygwin.com/) is comprehensive (but not necessarily light-weight) way to use PC friendly alternatives. 
 
 
-**A. Moving files from your local machine to a remote machine using `scp`**
+### **A. Moving files from your local machine to a remote machine using `scp`**
 
 **Program:** `scp` - [scp man page](http://www.openbsd.org/cgi-bin/man.cgi/OpenBSD-current/man1/scp.1?query=scp&sec=1)
 
@@ -84,7 +84,7 @@ $  scp local_file.txt dcuser@ip.address:/home/dcuser/
 
 ---
  
-**B. Moving files from your local machine to a remote machine using `rsync`**
+### **B. Moving files from your local machine to a remote machine using `rsync`**
 
 **Program:** `rsync` - [rsync man page](http://linuxcommand.org/man_pages/rsync1.html)
 
@@ -113,7 +113,7 @@ On your local computer choose (or create) a directory with at least one file. Tr
 
 ---
 
-**C. Importing/downloading files from a URL (e.g. ftp) to a remote machine using `curl` or `wget`**
+### **C. Importing/downloading files from a URL (e.g. ftp) to a remote machine using `curl` or `wget`**
 
 **Program:** 
 - `wget` - [wget man page](https://www.gnu.org/software/wget/manual/wget.html)
@@ -134,7 +134,7 @@ On your local computer choose (or create) a directory with at least one file. Tr
 
 ---
 
-**D. Importing files from SRA using SRA Toolkit**
+### **D. Importing files from SRA using SRA Toolkit**
 
 The NCBI [Sequence Read Archive](https://www.ncbi.nlm.nih.gov/sra) is a large repository of high-throughput sequencing read data. As valuable as these data are, it can still be challenging to navigate and import these data. 
 
@@ -170,7 +170,7 @@ The toolkit will also explain the important utilities such as `fasts-dump` which
 
 ---
 
-**E. Importing files from a grid resource (iRODS)**
+### **E. Importing files from a grid resource (iRODS)**
 
 **Program:** iRODS has become a popular system ([data grid](https://en.wikipedia.org/wiki/Data_grid)) for moving large amounts of data. Using [icommands](irods.org/download/) **(Note: Download only the iCommands CLI)** you can interface with your data grid. 
 
@@ -227,7 +227,7 @@ There are several other iCommands options (including how to use the -T option fo
 
 ---
 
-**F. Importing files using and FTP client**
+### **F. Importing files using and FTP client**
 
 **Program:** FileZilla is one of many free FTP clients that allow you to move files between local and remote locations. You can obtain FileZilla at the [FileZilla Download](https://filezilla-project.org/download.php?show_all=1) page. 
 
