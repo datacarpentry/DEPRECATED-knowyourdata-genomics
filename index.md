@@ -37,7 +37,7 @@ Before you can even get to examine the data you will often have to move it eithe
 According to the learning objectives, we want you to know about 7 methods to transfer data onto your remote server. If you are learning these at the workshop, we will probably only have time to cover 2-3 methods. Please come back and consider/try the rest if these are useful. Please also note, that many of these methods can be used in many more situations that we will cover in these examples. Many of these programs will also have options we will not cover in the workshop so read the man pages, especially when you want to ask the question can program `xxx` do `yyy`? It probably can, check the man page!
 
 #### Important Caveats 
-- We will only discuss getting data onto your cloud/HPC server; see the [DATAROUNDTRIPPING LESSON - PLACEHOLDER]()
+- We will mostly discuss getting data onto your cloud/HPC server; most of the tools will allow you to retrieve data from the cloud server as well.
 - Many of the programs covered don't have a simple alternative for PC. Since `scp` is the simplest, we will cover that here. For PC users who must try some of the other programs, [Cygwin](https://www.cygwin.com/) is comprehensive (but not necessarily light-weight) way to use PC friendly alternatives. 
 
 
