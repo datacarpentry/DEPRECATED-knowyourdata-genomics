@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+      <title>Manipulating VCF files</title>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+<link href="./css/bootstrap/bootstrap.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="./css/bootstrap/bootstrap-responsive.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="./css/swc.css" />
+<link rel="stylesheet" type="text/css" href="./css/swc-bootstrap.css" />
+<meta charset="UTF-8" />
+<meta http-equiv="last-modified" content="" />
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="./css/lesson.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="banner">
+  <a href="http://datacarpentry.org" title="Data Carpentry">
+    <img alt="Data Carpentry banner" src="./img/DC1_logo_small.png" height="50px" />
+  </a>
+</div>
+
+
+      <div class="row-fluid">
+        <div class="span10 offset1">
+	  <!-- start content -->
+          
+          <h1>Manipulating VCF files</h1>
+          
+          <h2>Learning Objectives</h2>
+
+<ul>
+<li>Install tools for VCF file manipulation.</li>
+<li>Download VCF files from 1000 Genomes project.</li>
+<li>Work with VCF files: slicing and extracting genotypes, locus and frequencies</li>
+</ul>
+
+<h2>Lesson</h2>
+
+<p>In this lesson you will learn how to manipulate VCF files. For this exercises we will use publicly available data from the 1000 Genomes  Project.</p>
+
+<h2>File format</h2>
+
+<p>The VCF file format is explained in detail <a href="http://samtools.github.io/hts-specs/VCFv4.1.pdf">here</a></p>
+
+<p>To reduce the size of the files, VFCs are usually compressed and indexed using the gzip and tabix command from HTSlib.</p>
+
+<p>VCFtools and vcflib are two collections of software tools commonly used for handling VCF data files. This lesson gives instructions on installing these tools on a Linux system.</p>
+
+<h2>VCFtools</h2>
+
+<p>VCFtools provides tools for site filtering, individual filtering and genotype filtering along with multiple options for output and comparison. More detailed instructions on using VCFtools can be found <a href="http://vcftools.sourceforge.net/man_latest.html">here</a>.</p>
+
+<p>To install VCFtools, download the source files from <a href="http://sourceforge.net/projects/vcftools/files/">here</a>. Extract the content of the downloaded vcftools_x.y.z.tar.gz file (<em>note</em>: x.y.z is the version of the file downloaded). Navigate to the folder where files have been extracted, and type <em>make</em> to compile the files.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ tar xzf vcftools_x.y.z.tar.gz
+$ cd vcftools_x.y.z
+$ make
+$ cd ..
+</code></pre></div>
+<p>Once the compilation process is complete, the perl scripts and cpp executable will be installed in the folder: <em>vcftools_x.y.z/bin/</em>. For simplicity, add this folder to your system path, so these tools are available even if you navigate to a different folder.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ export PATH=$PATH:/my/work/dir/vcftools_x.y.z/bin/
+</code></pre></div>
+<h2>vcflib</h2>
+
+<p>vcflib provides tools for manipulating VCF files such as comparison, format conversion, filtering, etc. More details on all the available options can be found <a href="https://github.com/ekg/vcflib">here</a>.</p>
+
+<p>vcflib can be downloaded <a href="https://github.com/ekg/vcflib">here</a>. To download and compile vcflib, use the following commands:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ git clone --recursive git://github.com/ekg/vcflib.git
+$ cd vcflib
+$ make
+$ cd ..
+</code></pre></div>
+<p>Once this is complete, vcflib tools should be available under <em>vcflib/bin/</em>. Again, for simplicity, add this folder to your system path, so these tools are available even if you navigate to a different folder.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ export PATH=$PATH:/my/work/dir/vcflib/bin/
+</code></pre></div>
+<h2>HTSlib</h2>
+
+<p>Another useful tool we will be using is <em>tabix</em>, which is part of <a href="http://www.htslib.org/download/">HTSlib</a>. You can download the source files for htslib from <a href="https://github.com/samtools/htslib/releases/download/1.2.1/htslib-1.2.1.tar.bz2">here</a>, or from directly from their <a href="https://github.com/samtools/htslib">github</a> repository. To install HTSlib, use the following commands:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ bunzip2 htslib-1.2.1.tar.bz2
+$ tar xf htslib-1.2.1.tar
+$ cd htslib-1.2.1/
+$ ./configure
+$ make
+$ make DESTDIR=/my/install/folder/ prefix=/ install
+$ cd ..
+</code></pre></div>
+<p>Once more, add the installed folder to your path:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ export PATH=$PATH./my/install/folder/bin
+</code></pre></div>
+<h2>Exercises</h2>
+
+<h3>1 - Downloading data</h3>
+
+<p>Sample VCF files can be downloaded from the <a href="http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/">1000 Genomes Project</a>.</p>
+
+<p>For the following examples we will use the <em>chromosome Y</em>  from the 1000 Genomes data repository.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chrY.phase3_integrated_v1a.20130502.genotypes.vcf.gz
+</code></pre></div>
+<p>We will download the data using the unix <a href="http://www.gnu.org/software/wget/manual/wget.html">wget</a> command to download the file from the ftp server of the 1000 Genomes Project: <em>Note:</em> We have selected this chromosome because it is small and easy to download.On your terminal, type the following:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chrY.phase3_integrated_v1a.20130502.genotypes.vcf.gz -O chrY.vcf.gz
+</code></pre></div>
+<p>This will download the chromosome Y VFC file and save it as <em>chrY.vcf.gz</em>.
+After downloading we need to index the file to allow standard tools for VCF files to quickly jump through the file. To create the index we can use tabix as follows:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ tabix -p vcf  chrY.vcf.gz
+</code></pre></div>
+<p>Notice that we must specify the format of the file (in this case vcf) with the <em>-p</em> parameter. After running this command, a new index file <em>chrY.vcf.gz.tbi</em> will be created.</p>
+
+<h3>2 - Slices</h3>
+
+<p>In these exercises we want to select slices of the original VCF files.</p>
+
+<p><strong>(a)</strong>
+We can use tabix to select any region of the file, by giving the indices we are interested in. However, if these indices are not included in the file, no data will be returned. For example:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ tabix chrY.vcf.gz Y:1-10
+</code></pre></div>
+<p>We can add the header to the output by using the <em>-h</em> flag. If we ask for the header of an empty slice, we will get only the header information:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ tabix -h chrY.vcf.gz Y:1-10
+</code></pre></div>
+<p>For example, if we are interested in the region of chromosome Y from base 2,655,180 to base 2,657,349 we can select this region of the vcf file using the tabix command which takes only the region  we are interested in and keeps the heading (<em>-h</em>) of the original file. The resulting file is a plain text file, if you want to see how it looks like you can use the unix command less.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ tabix -h  chrY.vcf.gz Y:2655180-2657349  &gt; mysliceofY.vcf
+$ less  mysliceofY.vcf
+</code></pre></div>
+<p>The plain text file can be read and used as it is, however many of the applications in vcflib and vcftools require it to be compressed (using bgzip) and indexed (using tabix). While telling tabix to index the file, we are specifying the file format (<em>-p</em>). Two new files will be produced with the same name as the original VCF and a gz (compression) and  tbi (indexing) extensions.  Type the ls -l command to see the files in your folder.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ bgzip mysliceofY.vcf
+$ tabix -p vcf  mysliceofY.vcf.gz
+$ ls -l
+-rw-r--r-- 1 user group  5791 Jun 23 09:37 mysliceofY.vcf.gz
+-rw-r--r-- 1 user group   104 Jun 23 09:37 mysliceofY.vcf.gz.tbi
+</code></pre></div>
+<p><strong>(b)</strong>
+We want to extract information for one individual (named HG00117) at one locus (named rs2534636 on chromosome Y at position 2657176). All the commands below are equivalent, and will create new vcf files:</p>
+
+<p>We ask vcftools to use the compressed file <em>chrY.vcf.gz</em> to extract only the line relative to the variant called rs2534636 and the column relative to individual HG00117 and to recode (i.e. rewrite, --recode) a new vcf called ex1b. vcftools will add the extension .recode. If you give a look to this uncompressed file you will see the genotypes of a single individual at one locus:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ vcftools --gzvcf chrY.vcf.gz --indv HG00117 --snp  rs2534636 --recode --out ex2b1
+$ less ex2b.recode.vcf
+</code></pre></div>
+<p>Another equivalent way to do it is to combine the tabix and the vcflib command <em>vcfkeepsamples</em> on the standard out of tabix (<em>-</em>) and redirect the output to the <em>ex2b2.vcf</em> file:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ tabix -h chrY.vcf.gz Y:215796346-215796346 | vcfkeepsamples -  HG00117 &gt; ex2b2.vcf
+</code></pre></div>
+<p>A third way to do it would be to ask vcftools to use the compressed file <em>chrY.vcf.gz</em> to extract only the line relative to the variant that is  on chromosome Y at position  2657176 and the column relative to individual  HG00117 and to recode a new vcf called ex2b3.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ vcftools --gzvcf chrY.vcf.gz  --chr Y --from-bp  2657176 --to-bp 2657176  --indv HG00117    --recode --out ex2b3
+</code></pre></div>
+<p><strong>(c)</strong>
+We want to extract VCF information for a list of individuals and a specific set of loci. To do this we will ask vcftools to consider individuals in the file <em>myindividual.list</em>  (a single column with individual’s ID file)  and a list of loci in the file “myloci.list” (a single column with a list of loci names file). We will store the result in a vcf called ex2c.</p>
+
+<p>To quickly make a list of loci we will use the unix command append  (&gt;&gt;):</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ echo rs11575897 &gt; myloci.list
+$ echo rs2534636 &gt;&gt; myloci.list
+$ echo rs1800865 &gt;&gt; myloci.list
+$ cat myloci.list
+rs11575897
+rs2534636
+rs1800865
+</code></pre></div>
+<p>To quickly make a list of three individuals we will use the vcflib command <em>vcfsamplenames</em> that extract the ID of the individuals in the VCF file:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ vcfsamplenames chrY.vcf.gz  | head -3 &gt; myindividual.list
+$ cat myindividual.list
+HG00096
+HG00101
+HG00103
+$ vcftools  --gzvcf chrY.vcf.gz --keep myindividual.list  --snps myloci.list --recode --out  ex2c
+</code></pre></div>
+<h3>3 - Info</h3>
+
+<p>In this exercise we are only interested in information contained in the “INFO” field. As an example the info field of the locus 2657176 on chromosome Y is a single string with a bunch of ;-delimited information:  </p>
+<div class="highlight"><pre><code class="language-" data-lang="">“AA=T;AC=89;AF=0.0721817;AN=1233;DP=5211;NS=1233;AMR_AF=0.0029;AFR_AF=0.0078;EUR_AF=0.0250;SAS_AF=0.1365;EAS_AF=0.0000”
+</code></pre></div>
+<p>We can use the vcflib command  vcft2tsv  to transform this string in a tab-delimited string in a file <em>myinfoat2657176.out</em> with two lines (a header, and one with values). We will ask vcf2tsv to  put an NA where data is not available using the option -n. To make it easier we will combine the <em>vcf2tsv</em> command with tabix to limit our analysis to one locus:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ tabix -h chrY.vcf.gz Y:2657176-2657176 | vcf2tsv -n NA &gt; myinfoat2657176.out
+</code></pre></div>
+<p>The output will be in the following format:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">CHROM</th>
+<th style="text-align: left">POS</th>
+<th style="text-align: left">ID</th>
+<th style="text-align: left">REF</th>
+<th style="text-align: left">ALT</th>
+<th style="text-align: left">QUAL</th>
+<th style="text-align: left">FILTER</th>
+<th style="text-align: left">AA</th>
+<th style="text-align: left">AC</th>
+<th style="text-align: left">AF</th>
+<th style="text-align: left">AFR_AF</th>
+<th style="text-align: left">AMR_AF</th>
+<th style="text-align: left">AN</th>
+<th style="text-align: left">DP</th>
+<th style="text-align: left">EAS_AF</th>
+<th style="text-align: left">END</th>
+<th style="text-align: left">EUR_AF</th>
+<th style="text-align: left">NS</th>
+<th style="text-align: left">SAS_AF</th>
+<th style="text-align: left">SVTYPE</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">Y</td>
+<td style="text-align: left">2657176</td>
+<td style="text-align: left">rs2534636</td>
+<td style="text-align: left">C</td>
+<td style="text-align: left">T</td>
+<td style="text-align: left">11169.1</td>
+<td style="text-align: left">PASS</td>
+<td style="text-align: left">T</td>
+<td style="text-align: left">89</td>
+<td style="text-align: left">0.0721817</td>
+<td style="text-align: left">0.0078</td>
+<td style="text-align: left">0.0029</td>
+<td style="text-align: left">1233</td>
+<td style="text-align: left">5211</td>
+<td style="text-align: left">0.0000</td>
+<td style="text-align: left">NA</td>
+<td style="text-align: left">0.0250</td>
+<td style="text-align: left">1233</td>
+<td style="text-align: left">0.1365</td>
+<td style="text-align: left">NA</td>
+</tr>
+</tbody></table>
+
+<p>The command can be run on the whole vcf file:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ vcf2tsv  -n NA  chrY.vcf.gz  &gt; myinfo.out
+</code></pre></div>
+<h3>4 - Extract a genotype</h3>
+
+<p>In this exercise we want to know the genotype of  individuals  HG00117 and HG00101 on chromosome Y in the region between base 2,655,180 and base  2,658,745. This example will show you both how to extract genotype information and how  to combine commands of the vcflib.</p>
+
+<p>We will  first select the region (but it can also be a single locus) with tabix and then ask <em>vcfkeepsamples</em> to process the standard out (<em>-</em>)  to slice the vcf for individual HG00117. Finally we will ask <em>vcfgenotypes</em> to extract the genotype:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ tabix -h chrY.vcf.gz  Y:2655180-2658745 | vcfkeepsamples  -  HG00117 HG00101 | vcfgenotypes   -
+Y       2655180 G       A       G,A     HG00101:G       HG00117:G
+Y       2655471 A       C       A,C     HG00101:A       HG00117:A
+Y       2655754 A       T       A,T     HG00101:A       HG00117:A
+Y       2655800 A       G       A,G     HG00101:A       HG00117:A
+Y       2655989 A       G       A,G     HG00101:A       HG00117:A
+Y       2655994 C       G       C,G     HG00101:C       HG00117:C
+Y       2656126 C       T       C,T     HG00101:C       HG00117:C
+Y       2656127 G       C       G,C     HG00101:G       HG00117:G
+Y       2656276 G       A       G,A     HG00101:G       HG00117:G
+Y       2656677 A       G       A,G     HG00101:A       HG00117:A
+Y       2657176 C       T       C,T     HG00101:C       HG00117:C
+Y       2657205 C       G       C,G     HG00101:C       HG00117:C
+Y       2657214 G       C       G,C     HG00101:G       HG00117:G
+Y       2657239 C       G       C,G     HG00101:C       HG00117:C
+Y       2657247 G       A       G,A     HG00101:G       HG00117:G
+Y       2657349 T       C       T,C     HG00101:T       HG00117:T
+
+</code></pre></div>
+<p>For all loci available in the VCF file in the selected region we will see the chromosome the position, information about reference and alternate alleles and the  genotype of the two selected individuals.</p>
+
+<h3>5 - Extract allele frequencies</h3>
+
+<p>In this exercise we want to  calculate allele frequencies  at all loci contained in the chromosome Y <em>chrY.vcf.gz</em> file. This command line will produce a file called <em>ex5.frq</em>. Type <em>less</em> to see the content:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ vcftools --gzvcf chrY.vcf.gz  --freq --out ex5
+$ less ex5.frq
+</code></pre></div>
+<p>If we want to restrict the calculation to a few selected individuals and a few loci, we can combine the command line above with few options:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ vcftools --gzvcf chrY.vcf.gz  --freq --out ex5slice  --keep myindividuals.list  --snps myloci.list
+</code></pre></div>
+<p>The output should look like this:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ cat ex5slice.frq
+CHROM    POS    N_ALLELES    N_CHR    {ALLELE:FREQ}
+Y    2655180    2    3    G:1    A:0
+Y    2657176    2    3    C:1    T:0
+Y    2658271    2    3    G:1    A:0
+</code></pre></div>
+	  <!-- end content -->
+	</div>
+      </div>
+
+      <div class="footer">
+  <a class="label swc-blue-bg" href="">Facebook</a>
+  <a class="label swc-blue-bg" href="">Google+</a>
+  <a class="label swc-blue-bg" href="">Twitter</a>
+  <a class="label swc-blue-bg" href="">GitHub</a>
+  <a class="label swc-blue-bg" href="./LICENSE.html">License</a>
+  <a class="bugreport label swc-blue-bg" href="mailto:?subject=bug%20in%20lessons/04-VCF-manipulation.md">Bug Report</a>
+</div>
+
+    </div>
+    <!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="./js/jquery-1.9.1.min.js"></script>
+<script src="./js/bootstrap/bootstrap.min.js"></script>
+
+  </body>
+</html>

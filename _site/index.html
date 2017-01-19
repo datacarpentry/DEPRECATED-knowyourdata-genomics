@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+      <title>Importing and Downloading Data</title>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+<link href="./css/bootstrap/bootstrap.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="./css/bootstrap/bootstrap-responsive.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="./css/swc.css" />
+<link rel="stylesheet" type="text/css" href="./css/swc-bootstrap.css" />
+<meta charset="UTF-8" />
+<meta http-equiv="last-modified" content="" />
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="./css/lesson.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="banner">
+  <a href="http://datacarpentry.org" title="Data Carpentry">
+    <img alt="Data Carpentry banner" src="./img/DC1_logo_small.png" height="50px" />
+  </a>
+</div>
+
+
+      <div class="row-fluid">
+        <div class="span10 offset1">
+	  <!-- start content -->
+          
+          <h1>Importing and Downloading Data</h1>
+          
+          <h2>Learning Objectives</h2>
+
+<ul>
+<li>Be able to import data onto a server:
+
+<ul>
+<li>from one server (or your computer) to another server using <code>scp</code><br></li>
+<li>from one server (or your computer) to another server using <code>rsync</code><br></li>
+<li>from an ftp/URL
+
+<ul>
+<li>using <code>wget</code></li>
+<li>using <code>curl</code></li>
+</ul></li>
+<li>from SRA</li>
+<li>from a grid resource (iRODS)</li>
+<li>Using an FTP client</li>
+</ul></li>
+<li>Be able to verify file integrity using checksums</li>
+<li>Be able to preview and decompress compressed files</li>
+</ul>
+
+<h2>Lesson</h2>
+
+<p>Just like laboratory bench work, a good analysis depends on having the right reagents. Besides the data that you have produced in your experiment, you will also need to have access to reference genomes, annotations, and software. While most reagents may be labeled with expiration dates or lot numbers, your data also need to pass &#39;smell tests&#39; - some checks you can use to examine and verify data integrity. </p>
+
+<p>Before you can even get to examine the data you will often have to move it either from your computer or an online database to your cloud instance or HPC server. This is getting easier, but is not guaranteed to be foolproof or fun. The exercises below will explain a few useful methods and show you how to use them. </p>
+
+<p><img src="http://imgs.xkcd.com/comics/file_transfer.png" alt="XKCD &#39;File Transfer&#39; Comic"></p>
+
+<blockquote>
+<p><strong>Tip:</strong> For the purpose of these lessons, we have pretty much staged all the large data files you will need during the workshop. If a link is broken, or or a download does not proceed we should have all the files needed already in place. </p>
+</blockquote>
+
+<h2>Exercises</h2>
+
+<h3>Choices, Choices, Choices</h3>
+
+<p>According to the learning objectives, we want you to know about 7 methods to transfer data onto your remote server. If you are learning these at the workshop, we will probably only have time to cover 2-3 methods. Please come back and consider/try the rest if these are useful. Please also note, that many of these methods can be used in many more situations that we will cover in these examples. Many of these programs will also have options we will not cover in the workshop so read the man pages, especially when you want to ask the question can program <code>xxx</code> do <code>yyy</code>? It probably can, check the man page!</p>
+
+<h4>Important Caveats</h4>
+
+<ul>
+<li>We will only discuss getting data onto your cloud/HPC server; see the <a href="">DATAROUNDTRIPPING LESSON - PLACEHOLDER</a></li>
+<li>Many of the programs covered don&#39;t have a simple alternative for PC. Since <code>scp</code> is the simplest, we will cover that here. For PC users who must try some of the other programs, <a href="https://www.cygwin.com/">Cygwin</a> is comprehensive (but not necessarily light-weight) way to use PC friendly alternatives. </li>
+</ul>
+
+<p><strong>A. Moving files from your local machine to a remote machine using <code>scp</code></strong></p>
+
+<p><strong>Program:</strong> <code>scp</code> - <a href="http://www.openbsd.org/cgi-bin/man.cgi/OpenBSD-current/man1/scp.1?query=scp&amp;sec=1">scp man page</a></p>
+
+<p><strong>When to use:</strong> When you have one or a few smaller (&lt;100mb) files to transfer from your computer to a remote machine. </p>
+
+<p><strong>Example Usage:</strong> 
+<code>bash
+$ scp /dir_on_your_computer/file_on_your_computer.file your_username@remotehost.edu:/remote/directory 
+</code></p>
+
+<blockquote>
+<p><strong>MAC/Linux vs PC difference:</strong> Since PC has no scp, you can use <a href="http://www.chiark.greenend.org.uk/%7Esgtatham/putty/download.html">PSCP</a> following the directions below:</p>
+</blockquote>
+
+<h4>PC</h4>
+
+<p>Using PC, we recommend you use the <em>PSCP</em> program. This program is from the same suite of tools as the putty program we have been using to connect. </p>
+
+<ol>
+<li>If you haven&#39;t done so, download pscp from <a href="http://the.earth.li/%7Esgtatham/putty/latest/x86/pscp.exe">http://the.earth.li/~sgtatham/putty/latest/x86/pscp.exe</a></li>
+<li>Make sure the <em>PSCP</em> program is somewhere you know on your computer. In this case, your Downloads folder is appropriate. </li>
+<li>Open the windows <a href="https://en.wikipedia.org/wiki/Windows_PowerShell">PowerShell</a>; go to your start menu/search enter the term <strong>&#39;cmd&#39;</strong>; you will be able to start the shell (the shell should start from C:\Users\your-pc-username&gt;). 
+4.Change to the download directory
+<code>
+&gt; cd Downloads
+</code></li>
+<li>locate a file on your computer that you wish to upload (be sure you know the path). Then upload it to your remote machine (<strong>you will need to know your ip address, and login credentials</strong>). You will be prompted to enter a password, and then your upload will begin. <strong>(make sure you use substitute &#39;your-pc-username&#39; for your actual pc username)</strong></li>
+</ol>
+<div class="highlight"><pre><code class="language-" data-lang="">C:\User\your-pc-username\Downloads&gt; pscp.exe local_file.txt dcuser@ip.address:/home/dcuser/
+</code></pre></div>
+<h4>MAC/Linux</h4>
+
+<ol>
+<li>Open the terminal and use the <em>scp</em> command to upload a file (e.g. local_file.txt) to the dcuser home directory:</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$  </span>scp local_file.txt dcuser@ip.address:/home/dcuser/
+</code></pre></div>
+<hr>
+
+<h3><code>scp</code> challenge</h3>
+
+<ol>
+<li>Copy a small text file from your your laptop to your remote machine&#39;s home directory. </li>
+</ol>
+
+<hr>
+
+<p><strong>B. Moving files from your local machine to a remote machine using <code>rsync</code></strong></p>
+
+<p><strong>Program:</strong> <code>rsync</code> - <a href="http://linuxcommand.org/man_pages/rsync1.html">rsync man page</a></p>
+
+<p><strong>When to use:</strong> When you have large (&gt;100mb)/lots of files to transfer from your computer to a remote machine. <code>rsync</code> will compare files and directories and copy only missing or incomplete files.  </p>
+
+<p><strong>Example Usage:</strong> 
+<code>bash
+$ rsync /dir_on_your_computer/file_on_your_computer.file your_username@remotehost.edu:/remote/directory     
+</code></p>
+
+<h3><code>rsync</code> options</h3>
+
+<p><code>rsync</code> has some important options that are too good to skip over:</p>
+
+<p><strong><code>rsync -a</code></strong>: The archive option allows you to copy directories (recursively) and preserve special unix filesystem features associated with files (such as modification date, permissions, etc.)</p>
+
+<p><strong><code>rsync -anv</code></strong>: In addition to the archive option, adding <code>n</code> (dry-run) and <code>v</code> (verbose) allows you to preview a list of the files that <em>would</em> be transferred   without the <code>n</code> option. </p>
+
+<hr>
+
+<h3><code>rsync</code> challenge</h3>
+
+<p>On your local computer choose (or create) a directory with at least one file. Try the following and observe the results assuming your directory and file have the path <code>/dir/file.file</code></p>
+
+<ol>
+<li>What is the difference between copying your directory <code>-anv</code> options if you use or omit a trailing slash (e.g. copying <code>rsync -anv /dir</code> vs. <code>rsync -anv /dir/</code>?</li>
+<li>What does <code>rsync</code> do when you use the <code>-P</code> option?</li>
+<li>what does <code>rsync -c</code> do?</li>
+</ol>
+
+<hr>
+
+<p><strong>C. Importing/downloading files from a URL (e.g. ftp) to a remote machine using <code>curl</code> or <code>wget</code></strong></p>
+
+<p><strong>Program:</strong> 
+- <code>wget</code> - <a href="https://www.gnu.org/software/wget/manual/wget.html">wget man page</a>
+- <code>curl</code> - <a href="http://manpages.debian.org/cgi-bin/man.cgi?query=curl&amp;apropos=0&amp;sektion=0&amp;manpath=Debian%20unstable%20sid&amp;format=html&amp;locale=en">curl man page</a></p>
+
+<p><strong>When to use:</strong>  </p>
+
+<p><code>curl</code> and <code>wget</code> are an easy way to import files when you have a URL. These methods generally work, however for really large datasets these methods will be slower (they are done over HTTP like standard webpages). </p>
+
+<p><strong>Example Usage:</strong> </p>
+<div class="highlight"><pre><code class="language-" data-lang="">```bash
+$  wget ftp://ftp.ncbi.nlm.nih.gov/genbank/README.genbank
+
+$ curl -o genbankreadme.txt ftp://ftp.ncbi.nlm.nih.gov/genbank/README.genbank
+# -o option allows you to set the filename
+```
+</code></pre></div>
+<hr>
+
+<p><strong>D. Importing files from SRA using SRA Toolkit</strong></p>
+
+<p>The NCBI <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive</a> is a large repository of high-throughput sequencing read data. As valuable as these data are, it can still be challenging to navigate and import these data. </p>
+
+<p><strong>Program:</strong>
+You will need to download the <a href="https://www.ncbi.nlm.nih.gov/Traces/sra/?view=software">SRA Toolkit</a> in order to import data from the SRA. </p>
+
+<p><strong>When to use:</strong></p>
+
+<p>When you want to access any of the sequencing experiment data hosted on SRA. </p>
+
+<p><strong>Example Usage:</strong>
+Using our workshop cloud computer (a 64-bit ubuntu machine), you could use the following:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.6.2/sratoolkit.2.6.2-ubuntu64.tar.gz
+
+# this compressed file must be extracted, e.g.:
+# $ tar -xvf sratoolkit.2.6.2-ubuntu64.tar.gz
+# individual tools will be in the /bin directory of the extracted folder
+# e.g: sratoolkit.2.6.2-ubuntu64/bin
+</code></pre></div>
+<p>The <a href="https://www.ncbi.nlm.nih.gov/Traces/sra/?view=toolkit_doc">Toolkit documentation</a> list the key functions of the software. Once you have the accession ID, you could download using the &#39;prefetch&#39; utility:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ ./prefetch -pc SRR390728
+# the "./" in front of the prefetch program tells linux to run/execute that program
+# the downloaded file will appear in an 'ncbi' folder that will be created in
+# your home directory. 
+</code></pre></div>
+<p>The toolkit will also explain the important utilities such as <code>fasts-dump</code> which will decompress the .sra file format into a fastq file and the ascp download utility which can help accelerate large downloads. </p>
+
+<hr>
+
+<p><strong>E. Importing files from a grid resource (iRODS)</strong></p>
+
+<p><strong>Program:</strong> iRODS has become a popular system (<a href="https://en.wikipedia.org/wiki/Data_grid">data grid</a>) for moving large amounts of data. Using <a href="irods.org/download/">icommands</a> <strong>(Note: Download only the iCommands CLI)</strong> you can interface with your data grid. </p>
+
+<p><strong>When to use:</strong></p>
+
+<p>If you need to access data available on an iRODS system</p>
+
+<p><strong>Example Usage:</strong></p>
+
+<p>This example works with the <a href="http://www.cyverse.org/data-store">CyVerse Data Store</a>, and iRODS system. If you are unfamiliar with iCommands see their <a href="https://docs.irods.org/master/icommands/user/">documentation</a>. This tutorial assumes you have a CyVerse account (See: <a href="http://www.cyverse.org/">CyVerse Website</a>). </p>
+
+<h3>Setting up iCommands for CyVerse</h3>
+
+<ol>
+<li>Initialize iCommands using the following command</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>iinit
+<span class="c"># tip: if the icommands are not in your system path you may need to begin</span>
+<span class="c"># commands with a "./"</span>
+</code></pre></div>
+<ol>
+<li>You will then be asked to setup your account and will need to enter the following information</li>
+</ol>
+
+<table><thead>
+<tr>
+<th>Prompt</th>
+<th>Entry</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>irodsHost</td>
+<td>data.iplantcollaborative.org</td>
+</tr>
+<tr>
+<td>port</td>
+<td>1247</td>
+</tr>
+<tr>
+<td>zone</td>
+<td>iplant</td>
+</tr>
+<tr>
+<td>irodsUserName</td>
+<td>your CyVerse username</td>
+</tr>
+<tr>
+<td>Current iRODS password</td>
+<td>your CyVerse password</td>
+</tr>
+</tbody></table>
+
+<ol>
+<li>Verify that you have connected to your CyVerse Data Store; view the contents of your home directory using the following the <em>ils</em> command:</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>ils
+</code></pre></div>
+<h4>Moving Data to and from your remote machine to Data Store</h4>
+
+<h5>Move to Data Store</h5>
+
+<p>To move data from a local source to CyVerse use the <em>iput</em> command. In this case we pass the -P option to see the progress of the transfer. </p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ iput -P remote_machine_file.txt .
+</code></pre></div>
+<p><strong>Tip:</strong> in this case, the &#39;.&#39; stands for the current CyVerse working directory which is by default &#39;/iplant/home/your-iplant-username&#39;</p>
+
+<h4>Retrieve from Data Store</h4>
+
+<p>Use the <em>iget</em> command to move files from the Data Store into your remote machine:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ iget -P iplant_datastore_file.txt .
+</code></pre></div>
+<p>There are several other iCommands options (including how to use the -T option for more reliable big data transfers, and -r command for recursive transfers of directories - See <a href="https://pods.iplantcollaborative.org/wiki/display/DS/Using+iCommands">iCommands documentation</a>. </p>
+
+<hr>
+
+<p><strong>F. Importing files using and FTP client</strong></p>
+
+<p><strong>Program:</strong> FileZilla is one of many free FTP clients that allow you to move files between local and remote locations. You can obtain FileZilla at the <a href="https://filezilla-project.org/download.php?show_all=1">FileZilla Download</a> page. </p>
+
+<p><strong>When to use:</strong></p>
+
+<p>If you would like a graphical user interface to manage files and folders. </p>
+
+<p><strong>Example Usage:</strong></p>
+
+<p>Instructions here are given for the genomics workshop cloud machines, but the process will be the similar for any remote server. Refer to the screenshot below as you consider the instructions. </p>
+
+<ol>
+<li>Download and install FileZilla</li>
+<li>Enter the location and user credentials of the remote server you are connecting to (section 1)
+
+<ul>
+<li>for host enter the machine IP address</li>
+<li>enter your dcuser username and the password</li>
+<li>for port enter 22</li>
+</ul></li>
+<li>Files on your local computer will be in the highlighted section 2. 
+
+<ul>
+<li>Your Desktop in a folder called &#39;Users&#39; &gt; &#39;your computer&#39;s username&#39; &gt; and Desktop</li>
+</ul></li>
+<li>Files on your remote computer will be in the highlighted section 3. 
+
+<ul>
+<li>Your Desktop in a folder called &#39;Users&#39; &gt; &#39;your computer&#39;s username&#39; &gt; and Desktop</li>
+</ul></li>
+<li>Move files between computers by drawing and dropping them in the desired locations. 
+
+<ul>
+<li><em>Tip:</em> You can resize windows in FileZilla for easier viewing.<br></li>
+</ul></li>
+</ol>
+
+<p><img src="./img/filezilla-wholeshot.png" alt="FileZilla Screenshot"  width="500"> </p>
+
+<h2>File Integrity and Compression</h2>
+
+<h3>Checksums - md5sum</h3>
+
+<p>In addition to understanding how to work with these files, we also need to understand how to verify the integrity of these files. It is not uncommon to download a file, and get error messages, have to restart downloads, move files, etc. In these cases, knowing how to verify that two files are the same (not simply named the same) is very important. To do this we use a process called checksums:</p>
+
+<p>According to <a href="https://en.wikipedia.org/wiki/Checksum">wikipedia</a> a checksum is &#39;a small-size datum from a block of digital data for the purpose of detecting errors which may have been introduced during its transmission or storage.&#39;In other words it is a result we can generate that uniquely corresponds to a file. Any change to that file (adding a space, deleting a character, etc.) will change the file&#39;s checksum. </p>
+
+<h2>Exercises</h2>
+
+<h3>A. File integrity - download a reference genome and verify the download</h3>
+
+<ol>
+<li>Use <code>wget</code> to download two &#39;test&#39; genomes from the following url:</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>wget http://de.iplantcollaborative.org/dl/d/6E4E9943-93F8-4136-86E3-14DA6D1B604F/GCF_000017985.1_ASM1798v1_genomic_2.fna
+</code></pre></div>
+<p>and</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>wget http://de.iplantcollaborative.org/dl/d/6E4E9943-93F8-4136-86E3-14DA6D1B604F/GCF_000017985.1_ASM1798v1_genomic_2.fna
+</code></pre></div>
+<ol>
+<li>Next for each of the use md5sum and compare the results</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>md5sum &lt;file&gt;
+</code></pre></div>
+<h3>B. Download a reference genome from Ensembl</h3>
+
+<ol>
+<li>Visit the Ensembl database at <a href="http://bacteria.ensembl.org/index.html">http://bacteria.ensembl.org/index.html</a>. In the &#39;Search for a genome&#39; search box search for &#39;Escherichia coli B str. REL606&#39;; this should bring you to the genome of the strain used in the Lenski experiment (<a href="http://bacteria.ensembl.org/escherichia_coli_b_str_rel606/Info/Index">ensemble direct link</a>)</li>
+<li>There will be a link &#39;<a href="ftp://ftp.ensemblgenomes.org/pub/bacteria/release-27/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/dna/">Download DNA Sequence</a>(FASTA)&#39;. Click on the link an copy the URL from the web browsers navigation/location display (i.e. http://bacteria.ensembl.org/escherichia<em>coli</em>b<em>str</em>rel606/Info/Index). </li>
+<li>Use the <code>wget</code> command to download the contents of the ftp site (don&#39;t forget to use the &#39;*&#39; wildcard to download all files)</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>wget ftp://ftp.ensemblgenomes.org/pub/bacteria/release-27/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/dna/<span class="k">*</span>
+</code></pre></div>
+<p>You should have downloaded the following files:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">CHECKSUMS
+Escherichia_coli_b_str_rel606.GCA_000017985.1.27.dna.chromosome.Chromosome.fa.gz
+Escherichia_coli_b_str_rel606.GCA_000017985.1.27.dna.genome.fa.gz
+Escherichia_coli_b_str_rel606.GCA_000017985.1.27.dna_rm.chromosome.Chromosome.fa.gz
+Escherichia_coli_b_str_rel606.GCA_000017985.1.27.dna_rm.genome.fa.gz
+Escherichia_coli_b_str_rel606.GCA_000017985.1.27.dna_rm.toplevel.fa.gz
+Escherichia_coli_b_str_rel606.GCA_000017985.1.27.dna_sm.chromosome.Chromosome.fa.gz
+Escherichia_coli_b_str_rel606.GCA_000017985.1.27.dna_sm.genome.fa.gz
+Escherichia_coli_b_str_rel606.GCA_000017985.1.27.dna_sm.toplevel.fa.gz
+Escherichia_coli_b_str_rel606.GCA_000017985.1.27.dna.toplevel.fa.gz
+README
+</code></pre></div>
+<ol>
+<li>Use the <code>less</code> command to examine the README file - in particular, look at the <sequence type> definition to understand what the differently zipped files are. </li>
+<li>Generate a checksum using the <code>sum</code> command(<code>sum</code> is used by Enseml and is  an alternative to <code>md5sum</code>) for the <strong>&#39;Escherichia<em>coli</em>b<em>str</em>rel606.GCA_000017985.1.27.dna.genome.fa.gz&#39;</strong> file and compare with the last few digits of the sum displayed in the CHECKSUMS file. </li>
+<li>Preview the first few lines (<code>head</code>) of the compressed (gzip&#39;d) reference genome using the <code>zcat</code> command:</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>zcat Escherichia_coli_b_str_rel606.GCA_000017985.1.27.dna.genome.fa.gz |head
+</code></pre></div>
+<ol>
+<li>Finally, unzip the E.coli reference genome, which will be part of the variant calling lesson and place it in your &#39;data folder&#39; in a new &#39;ref_genome&#39; folder. </li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>gzip -d Escherichia_coli_b_str_rel606.GCA_000017985.1.27.dna.genome.fa.gz
+</code></pre></div>
+<p><strong>Tip:</strong> create the &#39;ref<em>genome&#39; folder in &#39;~/dc</em>workshop/data&#39; and use the <em>cp</em> command to move the data</p>
+
+	  <!-- end content -->
+	</div>
+      </div>
+
+      <div class="footer">
+  <a class="label swc-blue-bg" href="">Facebook</a>
+  <a class="label swc-blue-bg" href="">Google+</a>
+  <a class="label swc-blue-bg" href="">Twitter</a>
+  <a class="label swc-blue-bg" href="">GitHub</a>
+  <a class="label swc-blue-bg" href="./LICENSE.html">License</a>
+  <a class="bugreport label swc-blue-bg" href="mailto:?subject=bug%20in%20index.md">Bug Report</a>
+</div>
+
+    </div>
+    <!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="./js/jquery-1.9.1.min.js"></script>
+<script src="./js/bootstrap/bootstrap.min.js"></script>
+
+  </body>
+</html>
